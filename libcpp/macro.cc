@@ -2927,7 +2927,7 @@ cpp_get_token_1 (cpp_reader *pfile, location_t *location)
       /* Context->prev == 0 <=> base context.  */
       if (!context->prev)
 	{
-	  result = _cpp_lex_token (pfile);
+	  result = _cpp_lex_token (pfile); // MEE breakpoints
 	  virt_loc = result->src_loc;
 	}
       else if (!reached_end_of_context (context))
@@ -3196,7 +3196,7 @@ cpp_get_token (cpp_reader *pfile)
 const cpp_token *
 cpp_get_token_with_location (cpp_reader *pfile, location_t *loc)
 {
-  return cpp_get_token_1 (pfile, loc);
+  return cpp_get_token_1 (pfile, loc); // MEE breakpoints
 }
 
 /* Returns true if we're expanding an object-like macro that was

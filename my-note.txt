@@ -1,0 +1,78 @@
+1. /workspace/gcc/objdir/Makefile
+2. /workspace/gcc/objdir/gcc/Makefile
+
+
+
+
+
+$(MAKE) $(RECURSE_FLAGS_TO_PASS) installdirs install-host install-target
+
+/bin/bash /workspace/gcc/objdir/../mkinstalldirs /usr/local /usr/local
+
+
+
+
+
+
+FROM: /workspace/gcc/objdir/Makefile
+.PHONY: install-host
+install-host:  \
+    maybe-install-bfd \
+    maybe-install-opcodes \
+    maybe-install-binutils \
+    maybe-install-bison \
+    maybe-install-cgen \
+    maybe-install-dejagnu \
+    maybe-install-etc \
+    maybe-install-fastjar \
+    maybe-install-fixincludes \ <- yes, got further detail
+    maybe-install-flex \
+    maybe-install-gas \
+    maybe-install-gcc \ <- yes, got further detail
+    maybe-install-gmp \ <- yes, but further, no
+    maybe-install-mpfr \ <- yes, but further, no
+    maybe-install-mpc \ <- yes, but further, no
+    maybe-install-isl \ <- yes, but further, no
+    maybe-install-gold \
+    maybe-install-gprof \
+    maybe-install-intl \ <- yes, got further detail
+    maybe-install-tcl \
+    maybe-install-itcl \
+    maybe-install-ld \
+    maybe-install-libbacktrace \ <- yes, got further detail
+    maybe-install-libcpp \ <- yes, got further detail
+    maybe-install-libcody \ <- yes, but further, no
+    maybe-install-libdecnumber \ <- yes, got further detail
+    maybe-install-libgui \
+    maybe-install-libiberty \ <- yes, got further detail
+    maybe-install-libiberty-linker-plugin \
+    maybe-install-libiconv \
+    maybe-install-m4 \
+    maybe-install-readline \
+    maybe-install-sid \
+    maybe-install-sim \
+    maybe-install-texinfo \
+    maybe-install-zlib \ <- yes, but further, no
+    maybe-install-gnulib \
+    maybe-install-gdbsupport \
+    maybe-install-gdbserver \
+    maybe-install-gdb \
+    maybe-install-expect \
+    maybe-install-guile \
+    maybe-install-tk \
+    maybe-install-libtermcap \
+    maybe-install-utils \
+    maybe-install-c++tools \ <- yes, got further detail
+    maybe-install-gnattools \
+    maybe-install-lto-plugin \ <- yes, got further detail
+    maybe-install-libcc1 \ <- yes, got further detail
+    maybe-install-gotools \
+    maybe-install-libctf \
+    maybe-install-libsframe
+
+
+
+FROM: /workspace/gcc/objdir/gcc/Makefile
+install: install-common $(INSTALL_HEADERS) \
+    install-cpp install-man install-info install-po \
+    install-driver install-lto-wrapper install-gcc-ar

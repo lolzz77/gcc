@@ -327,6 +327,7 @@ c_lex_one_token (c_parser *parser, c_token *token, bool raw = false)
 
 	if (C_IS_RESERVED_WORD (token->value))
 	  {
+      // here get the reserved keyword enum
 	    enum rid rid_code = C_RID_CODE (token->value);
 
 	    if (rid_code == RID_CXX_COMPAT_WARN)
@@ -495,7 +496,7 @@ c_parser_peek_token (c_parser *parser)
 {
   if (parser->tokens_avail == 0)
     {
-      c_lex_one_token (parser, &parser->tokens[0]);
+      c_lex_one_token (parser, &parser->tokens[0]); // MEE breakpoints
       parser->tokens_avail = 1;
     }
   return &parser->tokens[0];

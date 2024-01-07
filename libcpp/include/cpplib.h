@@ -156,6 +156,7 @@ enum cpp_ttype
   N_TTYPES,
 
   /* A token type for keywords, as opposed to ordinary identifiers.  */
+  // keyword enum
   CPP_KEYWORD,
 
   /* Positions in the table.  */

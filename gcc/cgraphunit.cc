@@ -2551,7 +2551,7 @@ symbol_table::finalize_compilation_unit (void)
 
   /* Gimplify and lower all functions, compute reachability and
      remove unreachable nodes.  */
-  analyze_functions (/*first_time=*/true);
+  analyze_functions (/*first_time=*/true); // MEE breakpoints
 
   /* Mark alias targets necessary and emit diagnostics.  */
   handle_alias_pairs ();

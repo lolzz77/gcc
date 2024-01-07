@@ -1233,6 +1233,7 @@ c_common_init (void)
 
 /* Initialize the integrated preprocessor after debug output has been
    initialized; loop over each input file.  */
+// start of compiling files?
 void
 c_common_parse_file (void)
 {
@@ -1245,7 +1246,7 @@ c_common_parse_file (void)
       dumps->dump_start (TDI_original, &dump_flags);
       pch_init ();
       push_file_scope ();
-      c_parse_file ();
+      c_parse_file (); // MEE breakpoints
       pop_file_scope ();
       /* And end the main input file, if the debug writer wants it  */
       if (debug_hooks->start_end_main_source_file)

@@ -441,7 +441,7 @@ compile_file (void)
   timevar_push (TV_PARSE_GLOBAL);
 
   /* Parse entire file and generate initial debug information.  */
-  lang_hooks.parse_file ();
+  lang_hooks.parse_file (); // MEE breakpoints
 
   timevar_pop (TV_PARSE_GLOBAL);
   timevar_stop (TV_PHASE_PARSING);

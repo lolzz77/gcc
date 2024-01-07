@@ -344,6 +344,7 @@ static bool nonnull_check_p (tree, unsigned HOST_WIDE_INT);
    word.  In Objective-C++ it is too.  In Objective-C, it is a
    reserved word too, but only if it follows an '@' sign.
 */
+// list of reserved word
 const struct c_common_resword c_common_reswords[] =
 {
   { "_Alignas",		RID_ALIGNAS,   D_CONLY },

@@ -2271,7 +2271,7 @@ lex_identifier (cpp_reader *pfile, const uchar *base, bool starts_ucn,
     }
 
   /* Rarely, identifiers require diagnostics when lexed.  */
-  if (__builtin_expect ((result->flags & NODE_DIAGNOSTIC)
+  if (__builtin_expect ((result->flags & NODE_DIAGNOSTIC) // MEE breakpoints - to check the result varaible, the text it is lexing
 			&& !pfile->state.skipping, 0))
     {
       /* It is allowed to poison the same identifier twice.  */
@@ -3616,7 +3616,7 @@ _cpp_lex_token (cpp_reader *pfile)
 	  result = pfile->cur_token++;
 	}
       else
-	result = _cpp_lex_direct (pfile);
+	result = _cpp_lex_direct (pfile); // MEE breakpoints
 
       if (result->flags & BOL)
 	{
@@ -3830,7 +3830,7 @@ _cpp_lex_direct (cpp_reader *pfile)
   else
     result->src_loc = linemap_position_for_column (pfile->line_table,
 					  CPP_BUF_COLUMN (buffer, buffer->cur));
-
+  // here lexing the token type
   switch (c)
     {
     case ' ': case '\t': case '\f': case '\v': case '\0':
@@ -3900,7 +3900,7 @@ _cpp_lex_direct (cpp_reader *pfile)
 	    }
 	}
       /* Fall through.  */
-
+  // this is where it determines the token type
     case '_':
     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
     case 'g': case 'h': case 'i': case 'j': case 'k': case 'l':
@@ -3915,7 +3915,7 @@ _cpp_lex_direct (cpp_reader *pfile)
       result->type = CPP_NAME;
       {
 	struct normalize_state nst = INITIAL_NORMALIZE_STATE;
-	result->val.node.node = lex_identifier (pfile, buffer->cur - 1, false,
+	result->val.node.node = lex_identifier (pfile, buffer->cur - 1, false, // MEE breakpoints
 						&nst,
 						&result->val.node.spelling);
 	warn_about_normalization (pfile, result, &nst, true);

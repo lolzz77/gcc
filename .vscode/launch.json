@@ -7,8 +7,20 @@
         {
             "type": "cppdbg",
             "request": "launch",
-            "name": "GCC DEBUG",
+            "name": "GCC DEBUG - cc1.out",
             "program": "/workspace/gcc/objdir/gcc/cc1",
+            "cwd" : "/workspace/gcc/",
+            "args": [
+                "${input:pickProgram}"
+            ]
+        },
+        {
+            // This wont work, to run .c file, you need to compile it into executable first
+            // i'll just leave this here.
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "GCC DEBUG - main.cc",
+            "program": "/workspace/gcc/gcc/main.cc",
             "cwd" : "/workspace/gcc/",
             "args": [
                 "${input:pickProgram}"

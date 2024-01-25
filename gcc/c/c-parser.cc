@@ -288,7 +288,7 @@ static void
 c_lex_one_token (c_parser *parser, c_token *token, bool raw = false)
 {
   timevar_push (TV_LEX);
-
+  // MEE breakpoint. This is where it will lex the code of the file u wan to compile
   if (raw || vec_safe_length (parser->raw_tokens) == 0)
     {
       token->type = c_lex_with_flags (&token->value, &token->location,

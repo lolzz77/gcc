@@ -468,7 +468,7 @@ compile_file (void)
   if (!in_lto_p)
     {
       timevar_start (TV_PHASE_OPT_GEN);
-      symtab->finalize_compilation_unit ();
+      symtab->finalize_compilation_unit (); // this is where it will print 'Analyzing compilation unit' in terminal
       timevar_stop (TV_PHASE_OPT_GEN);
     }
 

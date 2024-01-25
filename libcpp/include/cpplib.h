@@ -944,7 +944,7 @@ enum node_type
 /* Different flavors of builtin macro.  _Pragma is an operator, but we
    handle it with the builtin code for efficiency reasons.  */
 enum cpp_builtin_type
-{
+{ // built-in enum
   BT_SPECLINE = 0,		/* `__LINE__' */
   BT_DATE,			/* `__DATE__' */
   BT_FILE,			/* `__FILE__' */

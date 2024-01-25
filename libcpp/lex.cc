@@ -3614,7 +3614,10 @@ _cpp_lex_token (cpp_reader *pfile)
 	{
 	  pfile->lookaheads--;
 	  result = pfile->cur_token++;
-	}
+	} 
+  // it is lexing an include header file
+  // inspect pfile->quote_include & bracket_include
+  // i hv no idea which header file
       else
 	result = _cpp_lex_direct (pfile); // MEE breakpoints
 

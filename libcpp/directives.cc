@@ -590,7 +590,7 @@ _cpp_handle_directive (cpp_reader *pfile, bool indented)
 static void
 run_directive (cpp_reader *pfile, int dir_no, const char *buf, size_t count)
 {
-  cpp_push_buffer (pfile, (const uchar *) buf, count,
+  cpp_push_buffer (pfile, (const uchar *) buf, count, // MEE breakpoint, here, will replace parse_in->buffer->next_line to a header file's content
 		   /* from_stage3 */ true);
   start_directive (pfile);
 
@@ -2753,7 +2753,7 @@ cpp_push_buffer (cpp_reader *pfile, const uchar *buffer, size_t len,
   new_buffer->prev = pfile->buffer;
   new_buffer->need_line = true;
 
-  pfile->buffer = new_buffer;
+  pfile->buffer = new_buffer; // MEE breakpoints. Here, depends on caller, will replace parse_in->buffer->next_line content
 
   return new_buffer;
 }

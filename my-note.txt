@@ -7,7 +7,6 @@
 
 $(MAKE) $(RECURSE_FLAGS_TO_PASS) installdirs install-host install-target
 
-/bin/bash /workspace/gcc/objdir/../mkinstalldirs /usr/local /usr/local
 
 
 
@@ -76,3 +75,25 @@ FROM: /workspace/gcc/objdir/gcc/Makefile
 install: install-common $(INSTALL_HEADERS) \
     install-cpp install-man install-info install-po \
     install-driver install-lto-wrapper install-gcc-ar
+
+
+
+
+FROM: /workspace/gcc/objdir/Makefile
+$(SHELL) $(srcdir)/mkinstalldirs $(MAKEDIRS)
+/bin/bash /workspace/gcc/objdir/../mkinstalldirs /usr/local /usr/local
+
+
+
+FROM: /workspace/gcc/mkinstalldirs
+
+
+
+
+findn cc1
+./usr/lib/gcc/x86_64-linux-gnu/11/cc1
+./usr/local/libexec/gcc/x86_64-pc-linux-gnu/13.2.0/cc1 <- if u remove this, the gcc from /usr/local/bin/gcc will have error unable to find cc1
+find: './proc/102468': No such file or directory
+./workspace/gcc/objdir/stage1-gcc/cc1
+./workspace/gcc/objdir/gcc/cc1
+./workspace/gcc/objdir/prev-gcc/cc1

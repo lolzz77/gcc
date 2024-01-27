@@ -15,6 +15,36 @@
             ]
         },
         {
+            // for this one, i have to use /usr/local/bin/gcc
+            // rather than using /workspace/gcc/objdir/gcc/xgcc
+            // cos it will complain cannot find cc1
+            // apparently, it will go to some certain location to find cc1,
+            // instead of finding it in the same directory
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "GCC DEBUG - gcc",
+            "program": "/usr/local/bin/gcc",
+            "cwd" : "/workspace/gcc/",
+            "args": [
+                "${input:pickProgram}"
+            ]
+        },
+        {
+            // How to find out which file it runs & set breakpoint
+            // run 'gdb -tui /workspace/gcc/objdir/gcc/xg++'
+            // inside GDB, run 'b main'
+            // 'r'
+            // then, u can see which file it runs
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "GCC DEBUG - xg++",
+            "program": "/workspace/gcc/objdir/gcc/xg++",
+            "cwd" : "/workspace/gcc/",
+            "args": [
+                "${input:pickProgram}"
+            ]
+        },
+        {
             // This wont work, to run .c file, you need to compile it into executable first
             // i'll just leave this here.
             "type": "cppdbg",

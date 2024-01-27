@@ -20,6 +20,10 @@
             // cos it will complain cannot find cc1
             // apparently, it will go to some certain location to find cc1,
             // instead of finding it in the same directory
+
+            // as for the output 'a.out' file,
+            // it will be outputted at path stated in "cwd"
+            // that is, /workspace/gcc/
             "type": "cppdbg",
             "request": "launch",
             "name": "GCC DEBUG - gcc",

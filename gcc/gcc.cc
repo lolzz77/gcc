@@ -1397,7 +1397,7 @@ static struct compiler *compilers;
 static int n_compilers;
 
 /* The default list of file name suffixes and their compilation specs.  */
-
+// list of compilers
 static const struct compiler default_compilers[] =
 {
   /* Add lists of suffixes of known languages here.  If those languages
@@ -1429,6 +1429,7 @@ static const struct compiler default_compilers[] =
   {"@c",
    /* cc1 has an integrated ISO C preprocessor.  We should invoke the
       external preprocessor if -save-temps is given.  */
+      // these are 'switch()' case, go search for function 'validate_switches_from_spec'
      "%{E|M|MM:%(trad_capable_cpp) %(cpp_options) %(cpp_debug_options)}\
       %{!E:%{!M:%{!MM:\
           %{traditional:\
@@ -8879,7 +8880,7 @@ driver::do_spec_on_infiles () const
 
       if (input_file_compiler)
 	{
-	  /* Ok, we found an applicable compiler.  Run its spec.  */
+	  /* Ok, we found an applicable compiler.  Run its spec.  */ // MEE breakpoitns, inspect the compiler spec
 
 	  if (input_file_compiler->spec[0] == '#')
 	    {
@@ -8900,7 +8901,7 @@ driver::do_spec_on_infiles () const
 		  debug_check_temp_file[1] = NULL;
 		}
 
-	      value = do_spec (input_file_compiler->spec);
+	      value = do_spec (input_file_compiler->spec); // TODO: study this
 	      infiles[i].compiled = true;
 	      if (value < 0)
 		this_file_error = 1;
@@ -8964,14 +8965,14 @@ driver::do_spec_on_infiles () const
 	  delete_failure_queue ();
 	  errorcount++;
 	}
-      /* If this compilation succeeded, don't delete those files later.  */
+      /* If this compilation succeeded, don't delete those files later.  */ // MEE breakpoints: here ady done compilation? HAHA
       clear_failure_queue ();
     }
 
   /* Reset the input file name to the first compile/object file name, for use
      with %b in LINK_SPEC. We use the first input file that we can find
      a compiler to compile it instead of using infiles.language since for
-     languages other than C we use aliases that we then lookup later.  */
+     languages other than C we use aliases that we then lookup later.  */ // MEE breakpoints: here preparing to do linking?
   if (n_infiles > 0)
     {
       int i;
@@ -9106,7 +9107,7 @@ driver::maybe_run_linker (const char *argv0) const
 		    " to the linker.\n\n"));
 	  fflush (stdout);
 	}
-      int value = do_spec (link_command_spec);
+      int value = do_spec (link_command_spec); // MEE breakpoints, the linker spec
       if (value < 0)
 	errorcount = 1;
       linker_was_run = (tmp != execution_count);

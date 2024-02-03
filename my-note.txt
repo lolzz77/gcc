@@ -97,3 +97,158 @@ find: './proc/102468': No such file or directory
 ./workspace/gcc/objdir/stage1-gcc/cc1
 ./workspace/gcc/objdir/gcc/cc1
 ./workspace/gcc/objdir/prev-gcc/cc1
+
+
+
+
+
+
+
+
+
+
+
+// compiler spec
+%{
+    E|M|MM:
+    %(trad_capable_cpp)
+    %(cpp_options)
+    %(cpp_debug_options)
+}
+
+%{
+    !E:
+    %{
+        !M:
+        %{
+            !MM:
+            %{
+                traditional:%eGNU C no longer supports -traditional without -E
+            }
+            %{
+                save-temps*|traditional-cpp|no-integrated-cpp:
+                %(trad_capable_cpp) \t
+                %(cpp_options) -o
+                %{save-temps*:%b.i}
+                %{!save-temps*:%g.i} \n\t    cc1 -fpreprocessed
+                %{save-temps*:%b.i}
+                %{!save-temps*:%g.i} \t
+                %(cc1_options)
+            }
+            %{
+                !save-temps*:
+                %{
+                    !traditional-cpp:
+                    %{
+                        !no-integrated-cpp:\t  cc1
+                        %(cpp_unique_options)
+                        %(cc1_options)
+                    }
+                }
+            }
+            %{
+                !fsyntax-only:%(invoke_as)
+            }
+        }
+    }
+}
+
+
+
+%{
+    !fsyntax-only:
+    %{
+        !c:
+        %{
+            !M:
+            %{
+                !MM:
+                %{
+                    !E:
+                    %{
+                        !S:
+                        %(linker)
+                        %{
+                            !fno-use-linker-plugin:
+                            %{
+                                !fno-lto:     -plugin
+                                %(linker_plugin_file)
+                                -plugin-opt=%(lto_wrapper)
+                                -plugin-opt=-fresolution=%u.res
+                                %{
+                                    flinker-output=*:-plugin-opt=-linker-output-known
+                                }
+                                %{
+                                    !nostdlib:
+                                    %{
+                                        !nodefaultlibs:%:pass-through-libs(%(link_gcc_c_sequence))
+                                    }
+                                }
+                            }
+                        }
+                        %{
+                            flto|flto=*:%<fcompare-debug*
+                        }
+                        %{flto}
+                        %{fno-lto}
+                        %{flto=*}
+                        %l
+                        %{static|shared|r:;pie:-pie}
+                        %{fuse-ld=*:-fuse-ld=%*}
+                        %{gz|gz=zlib:--compress-debug-sections=zlib}
+                        %{gz=none:--compress-debug-sections=none}
+                        %{gz=zstd:%e-gz=zstd is not supported in this configuration}
+                        %{gz=zlib-gnu:}%X %{o*} %{e*} %{N} %{n} %{r}    %{s} %{t} %{u*} %{z} %{Z}
+                        %{!nostdlib:%{!r:%{!nostartfiles:%S}}}
+                        %{static|no-pie|static-pie:} %@{L*} %(mfwrap) %(link_libgcc)
+                        %{fvtable-verify=none:}
+                        %{fvtable-verify=std:
+                        %e-fvtable-verify=std is not supported in this configuration}
+                        %{fvtable-verify=preinit:%e-fvtable-verify=preinit is not supported in this configuration}
+                        %{
+                            !nostdlib:%{
+                                !r:%{
+                                    !nodefaultlibs:%{%:sanitize(address):%{!shared:libasan_preinit%O%s}
+                                    %{static-libasan:%{!shared:-Bstatic --whole-archive -lasan --no-whole-archive -Bdynamic}}
+                                    %{!static-libasan:-lasan}}
+                                    %{%:sanitize(hwaddress):%{!shared:libhwasan_preinit%O%s}
+                                    %{static-libhwasan:%{!shared:-Bstatic --whole-archive -lhwasan --no-whole-archive -Bdynamic}}%{!static-libhwasan:-lhwasan}}
+                                    %{%:sanitize(thread):%{!shared:libtsan_preinit%O%s}
+                                    %{static-libtsan:%{!shared:-Bstatic --whole-archive -ltsan --no-whole-archive -Bdynamic}}%{!static-libtsan:-ltsan}}
+                                    %{
+                                        %:sanitize(leak):%{!shared:liblsan_preinit%O%s}
+                                        %{
+                                            static-liblsan:%{!shared:-Bstatic --whole-archive -llsan --no-whole-archive -Bdynamic}
+                                        }
+                                        %{!static-liblsan:-llsan}
+                                    }
+                                }
+                            }
+                        } %o
+                        %{fopenacc|fopenmp|%:gt(%{ftree-parallelize-loops=*:%*} 1):\t%:include(libgomp.spec)%(link_gomp)}
+                        %{fgnu-tm:%:include(libitm.spec)%(link_itm)}    %(mflib)  %{fsplit-stack: --wrap=pthread_create}
+                        %{fprofile-arcs|fprofile-generate*|coverage:-lgcov}
+                        %{
+                            !nostdlib:%{
+                                !r:%{
+                                    !nodefaultlibs:%{%:sanitize(address): %{static-libasan|static:%:include(libsanitizer.spec)%(link_libasan)}
+                                    %{static:%ecannot specify -static with -fsanitize=address}}
+                                    %{%:sanitize(hwaddress): %{static-libhwasan|static:%:include(libsanitizer.spec)%(link_libhwasan)}\t%{static:%ecannot specify -static with -fsanitize=hwaddress}}
+                                    %{%:sanitize(thread): %{static-libtsan|static:%:include(libsanitizer.spec)%(link_libtsan)}
+                                    %{static:%ecannot specify -static with -fsanitize=thread}}
+                                    %{%:sanitize(undefined):%{static-libubsan:-Bstatic} -lubsan %{static-libubsan:-Bdynamic}
+                                    %{static-libubsan|static:%:include(libsanitizer.spec)%(link_libubsan)}}
+                                    %{
+                                        %:sanitize(leak): %{static-liblsan|static:%:include(libsanitizer.spec)%(link_liblsan)}
+                                    }
+                                }
+                            }
+                        }
+                        %{!nostdlib:%{!r:%{!nodefaultlibs:%(link_ssp) %(link_gcc_c_sequence)}}}
+                        %{!nostdlib:%{!r:%{!nostartfiles:%E}}} %{T*}  \n%(post_link)
+                    }
+                }
+            }
+        }
+    }
+}

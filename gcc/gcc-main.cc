@@ -40,7 +40,7 @@ extern int main (int, char **);
 
 int
 main (int argc, char **argv)
-{
+{  // MEE Breakpoints
   driver d (false, /* can_finalize */
 	    false); /* debug */
 

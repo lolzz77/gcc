@@ -3398,7 +3398,7 @@ execute (void)
 #endif
 
   /* Run each piped subprocess.  */
-
+  // after this line, i see a lot of random name files, i found that those *.s in `/tmp/*.s` is the file that u required to compile
   pex = pex_init (PEX_USE_PIPES | ((report_times || report_times_to_file)
 				   ? PEX_RECORD_TIMES : 0),
 		  progname, temp_filename);
@@ -5675,7 +5675,7 @@ do_spec (const char *spec)
 {
   int value;
 
-  value = do_spec_2 (spec, NULL);
+  value = do_spec_2 (spec, NULL); // MEE breakpoints, after this line, a *.s file is created in `/tmp/` dir, that is ur machien code (compiled) for the file u required to compile
 
   /* Force out any unfinished command.
      If -pipe, this forces out the last command if it ended in `|'.  */
@@ -6758,7 +6758,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 	      while (*p && *p != ')')
 		p++;
 
-	      /* See if it's in the list.  */
+	      /* See if it's in the list.  */ // MEE breakpoints, here got a list of specs that *compiled*?...
 	      for (len = p - name, sl = specs; sl; sl = sl->next)
 		if (sl->name_len == len && !strncmp (sl->name, name, len))
 		  {
@@ -6772,7 +6772,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 
 	      if (sl)
 		{
-		  value = do_spec_1 (name, 0, NULL);
+		  value = do_spec_1 (name, 0, NULL); // MEE breakpoints, reminder, this is recursive calling!!
 		  if (value != 0)
 		    return value;
 		}
@@ -8902,7 +8902,7 @@ driver::do_spec_on_infiles () const
 		}
 
 	      value = do_spec (input_file_compiler->spec); // TODO: study this
-	      infiles[i].compiled = true;
+	      infiles[i].compiled = true; // MEE, this means the file is compiled!
 	      if (value < 0)
 		this_file_error = 1;
 	      else if (compare_debug && debug_check_temp_file[0])

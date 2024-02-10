@@ -3255,7 +3255,7 @@ execute (void)
     }
 
   /* Count # of piped commands.  */
-  for (n_commands = 1, i = 0; argbuf.iterate (i, &arg); i++)
+  for (n_commands = 1, i = 0; argbuf.iterate (i, &arg); i++) // MEE Breakpoint, here a lot of shits u might wanna explore
     if (strcmp (arg, "|") == 0)
       n_commands++;
 
@@ -3273,12 +3273,12 @@ execute (void)
 
   if (!wrapper_string)
     {
-      string = find_a_program(commands[0].prog);
+      string = find_a_program(commands[0].prog); // MEE breakpoint, here calling the cc1 program
       if (string)
 	commands[0].argv[0] = string;
     }
 
-  for (n_commands = 1, i = 0; argbuf.iterate (i, &arg); i++)
+  for (n_commands = 1, i = 0; argbuf.iterate (i, &arg); i++) // MEE Breakpoint, here a lot of shits u might wanna explore
     if (arg && strcmp (arg, "|") == 0)
       {				/* each command.  */
 #if defined (__MSDOS__) || defined (OS2) || defined (VMS)
@@ -3411,7 +3411,7 @@ execute (void)
       int err;
       const char *string = commands[i].argv[0];
 
-      errmsg = pex_run (pex,
+      errmsg = pex_run (pex, // MEE breakpoints, after this line, the .s file has content
 			((i + 1 == n_commands ? PEX_LAST : 0)
 			 | (string == commands[i].prog ? PEX_SEARCH : 0)),
 			string, CONST_CAST (char **, commands[i].argv),
@@ -6006,7 +6006,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 
 	if (argbuf.length () > 0)
 	  {
-	    value = execute ();
+	    value = execute (); // MEE breakpoint, after creating .s temporary file, after this line, will have content inside that file
 	    if (value)
 	      return value;
 	  }
@@ -6319,7 +6319,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 
 		/* Make a new association if needed.  %u and %j
 		   require one.  */
-		if (t == 0 || c == 'u' || c == 'j')
+		if (t == 0 || c == 'u' || c == 'j') // MEE breakpoint, here create the .s machine code file
 		  {
 		    if (t == 0)
 		      {
@@ -6336,7 +6336,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 		    else
 		      t->suffix = save_string (suffix, suffix_length);
 		    t->unique = (c == 'u' || c == 'U' || c == 'j');
-		    temp_filename = make_temp_file (t->suffix);
+		    temp_filename = make_temp_file (t->suffix); // MEE breakpoint, here create .s file, but empty inside
 		    temp_filename_length = strlen (temp_filename);
 		    t->filename = temp_filename;
 		    t->filename_length = temp_filename_length;
@@ -6657,7 +6657,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 	    /* Here we define characters other than letters and digits.  */
 
 	  case '{':
-	    p = handle_braces (p);
+	    p = handle_braces (p); // MEE breakpoint, when the spec is "%{!fwpa*:   %{fcompare-debug=*"... . And, stop going forward when it is "!S:-o %|.s |\n as %(asm_options) %m.s %A }", step in instead.
 	    if (p == 0)
 	      return -1;
 	    break;
@@ -6771,7 +6771,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 		  }
 
 	      if (sl)
-		{
+		{ // MEE breakpoints, stop when see "%{!fwpa*:   %{fcompare-debug=*|fdump-final-insns=*:%:compare-debug-dump-opt()}   %{!S:-o %|.s |\n as %(asm_options) %m.s %A }  }"
 		  value = do_spec_1 (name, 0, NULL); // MEE breakpoints, reminder, this is recursive calling!!
 		  if (value != 0)
 		    return value;
@@ -7084,7 +7084,7 @@ process_marked_switches (void)
 
 static const char *
 handle_braces (const char *p)
-{
+{ // MEE breakpoints, step here when the *p is "!S:-o %|.s |\n as %(asm_options) %m.s %A }"
   const char *atom, *end_atom;
   const char *d_atom = NULL, *d_end_atom = NULL;
   char *esc_buf = NULL, *d_esc_buf = NULL;
@@ -7343,7 +7343,7 @@ process_brace_body (const char *p, const char *atom, const char *end_atom,
       char *string = save_string (body, end_body - body);
       if (!have_subst)
 	{
-	  if (do_spec_1 (string, 0, NULL) < 0)
+	  if (do_spec_1 (string, 0, NULL) < 0) // MEE breakpoint, stop when string is "-o %|.s |\n as %(asm_options) %m.s %A"
 	    {
 	      free (string);
 	      return 0;

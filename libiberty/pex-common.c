@@ -340,7 +340,7 @@ pex_run_in_environment (struct pex_obj *obj, int flags, const char *executable,
     toclose = obj->next_input;
 
   /* Run the program.  */
-
+  // MEE breakpoint, here runs the program
   pid = obj->funcs->exec_child (obj, flags, executable, argv, env,
 				in, out, errdes, toclose, &errmsg, err);
   if (pid < 0)

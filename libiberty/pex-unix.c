@@ -617,7 +617,7 @@ pex_unix_exec_child (struct pex_obj *obj, int flags, const char *executable,
 
   for (retries = 0; retries < 4; ++retries)
     {
-      pid = vfork ();
+      pid = vfork (); // MEE breakpoint, here execute the program
       if (pid >= 0)
 	break;
       sleep (sleep_interval);

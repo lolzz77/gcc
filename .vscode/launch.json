@@ -60,6 +60,17 @@
                 "${input:pickProgram}"
             ]
         },
+        {
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "GCC DEBUG - x86_64-pc-linux-gnu-gcc",
+            "program": "/usr/local/bin/x86_64-pc-linux-gnu-gcc", // I found this one using `inotifywait -m -r -e move / &`
+            "cwd" : "/workspace/gcc/",
+            "args": [
+                "${input:pickProgram}"
+            ]
+        },
+        
     ],
     "inputs": [
         {

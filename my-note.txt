@@ -1,3 +1,8 @@
+gcc-11 = gcc version 11
+gcc-ar = archiever, archive == libraries
+gcc-nm = to list out list of symbols
+
+
 1. /workspace/gcc/objdir/Makefile
 2. /workspace/gcc/objdir/gcc/Makefile
 
@@ -260,3 +265,31 @@ find: './proc/102468': No such file or directory
 
 
 %{!fwpa*:   %{fcompare-debug=*|fdump-final-insns=*:%:compare-debug-dump-opt()}   %{!S:-o %|.s |\n as %(asm_options) %m.s %A }  }
+
+
+
+
+
+
+
+
+
+
+
+
+# trying to print all traces, including those that alreayd finished, and output to a file
+
+If your program is already running, attach GDB to it using the process ID (PID). In the GDB prompt, execute the following commands:
+gdb <your_executable> <PID>
+(gdb) thread apply all bt
+
+
+If you have a core dump file (created when your program crashes), you can analyze it with GDB.
+Run GDB with the core dump and execute the following commands:
+gdb <your_executable> <core_dump_file>
+(gdb) thread apply all bt
+
+
+
+ gdb /usr/local/bin/x86_64-pc-linux-gnu-gcc -ex "thread apply all bt" -ex "file /workspace/test.out" -ex "r" -ex "detach" -ex "quit" > resu
+lt-print-all-traces.txt

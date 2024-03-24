@@ -2465,3 +2465,15 @@ root@2275bb86d935:/workspace/objdir
 $ 
 
 
+
+# Note
+1. Debug ld
+- apparently, `ld` is provided under `gnu binutil`, and the repo name is `gdb bin util`
+- https://www.gnu.org/software/software.html
+- if you scroll to the bottom, you see lots of software names
+- click `binutils`
+- https://www.gnu.org/software/binutils/
+- here says it includes `ld`
+- then below says `git clone git://sourceware.org/git/binutils-gdb.git` (you can see is GDB binutils)
+- https://sourceware.org/git/binutils-gdb
+- see `binutils-gdb.git`, see the description, it says `gdb and binutils`

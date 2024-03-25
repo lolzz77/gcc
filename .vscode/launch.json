@@ -67,6 +67,7 @@
             "program": "/usr/local/bin/x86_64-pc-linux-gnu-gcc", // I found this one using `inotifywait -m -r -e move / &`
             "cwd" : "/workspace/objdir2/",
             "args": [
+                "-v",
                 "${input:pickProgram}"
             ]
         },

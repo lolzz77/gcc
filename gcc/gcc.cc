@@ -3340,7 +3340,7 @@ execute (void)
 	      if (!**j)
 		fprintf (stderr, " \"\"");
 	      else
-		fprintf (stderr, " %s", *j);
+		fprintf (stderr, " %s", *j); // here prints the output to console hwne you add `-v` to gcc
 
 	  /* Print a pipe symbol after all but the last command.  */
 	  if (i + 1 != n_commands)

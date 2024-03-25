@@ -2476,4 +2476,4 @@ $
 - here says it includes `ld`
 - then below says `git clone git://sourceware.org/git/binutils-gdb.git` (you can see is GDB binutils)
 - https://sourceware.org/git/binutils-gdb
-- see `binutils-gdb.git`, see the description, it says `gdb and binutils`
+- see `binutils-gdb.git`, see the description, it says `gdb and binutils

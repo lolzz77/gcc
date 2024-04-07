@@ -1,7 +1,12 @@
 All Code:
 ```bash
-apt-get update -y; apt-get upgrade -y; cd /workspace/gcc; ./contrib/download_prerequisites; apt-get install flex -y; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib; make all-gcc -j3 && make install-gcc -j3;
+apt-get update -y; apt-get upgrade -y; cd /workspace/gcc; ./contrib/download_prerequisites; apt-get install flex -y; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib; make all-gcc -j3
 ```
+The last step is to `make install-gcc -j3`
+But i didnt include it
+Cos i did encounter gcc broken, cannot compile
+hmmm, maybe make a backup of your binaries first?
+
 
 # Setup
 1. `mkdir ../objdir` (go up 1 directory, is better dont do it in `gcc` directory)

@@ -1,6 +1,6 @@
 All Code:
 ```bash
-cd /workspace/gcc; ./contrib/download_prerequisites; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib; make all-gcc -j3; make install -j3
+apt-get update -y; apt-get upgrade -y; cd /workspace/gcc; ./contrib/download_prerequisites; apt-get install flex -y; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib; make all-gcc -j3 && make install-gcc -j3;
 ```
 
 # Setup
@@ -8,7 +8,11 @@ cd /workspace/gcc; ./contrib/download_prerequisites; cd ../; mkdir objdir; cd ob
 2. `cd ../objdir`
 3. `../gcc/configure --enable-languages=c,c++ --disable-multilib`
 4. `make all-gcc` (this takes about 16 minutes)
-5. here are the list target recipe
+5. `make install-gcc`
+6. gcc installed in `/usr/local/bin/gcc`
+7. Try `which gcc` or `whereis gcc`
+8. Verify the version `gcc -v`
+9. here are the list target recipe
 
 
 root@2275bb86d935:/workspace/objdir

@@ -10,6 +10,7 @@
             "name": "GCC DEBUG - cc1.out",
             "program": "/workspace/objdir/gcc/cc1", // objdir is situational, find where the `cc1` is and modify this path
             "cwd" : "/workspace/gcc/",
+            "stopAtEntry": true,
             "args": [
                 "${input:pickProgram}"
             ]
@@ -29,6 +30,7 @@
             "name": "GCC DEBUG - gcc",
             "program": "/usr/local/bin/gcc",  // `gcc` location is situational, find where the `gcc` is and modify this path
             "cwd" : "/workspace/gcc/",
+            "stopAtEntry": true,
             "args": [
                 "${input:pickProgram}"
             ]
@@ -44,6 +46,7 @@
             "name": "GCC DEBUG - xg++",
             "program": "/workspace/objdir/gcc/xg++", // objdir is situational, find where the `xg++` is and modify this path
             "cwd" : "/workspace/gcc/",
+            "stopAtEntry": true,
             "args": [
                 "${input:pickProgram}"
             ]
@@ -56,6 +59,7 @@
             "name": "GCC DEBUG - main.cc",
             "program": "/workspace/gcc/gcc/main.cc",
             "cwd" : "/workspace/gcc/",
+            "stopAtEntry": true,
             "args": [
                 "${input:pickProgram}"
             ]
@@ -66,6 +70,7 @@
             "name": "GCC DEBUG - x86_64-pc-linux-gnu-gcc",
             "program": "/usr/local/bin/x86_64-pc-linux-gnu-gcc", // I found this one using `inotifywait -m -r -e move / &`
             "cwd" : "/workspace/objdir2/",
+            "stopAtEntry": true,
             "args": [
                 "-v",
                 "${input:pickProgram}"
@@ -77,6 +82,7 @@
             "name": "GCC DEBUG - collect2",
             "program": "/usr/local/libexec/gcc/x86_64-pc-linux-gnu/13.2.0/collect2", // I found this one using `inotifywait -m -r -e move / &`
             "cwd" : "/workspace/objdir2/",
+            "stopAtEntry": true,
             "args": [
                 "${input:pickProgram}"
             ]

@@ -1,4 +1,9 @@
-# Step
+All Code:
+```bash
+cd /workspace/gcc; ./contrib/download_prerequisites; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib; make all-gcc -j3; make install -j3
+```
+
+# Setup
 1. `mkdir ../objdir` (go up 1 directory, is better dont do it in `gcc` directory)
 2. `cd ../objdir`
 3. `../gcc/configure --enable-languages=c,c++ --disable-multilib`

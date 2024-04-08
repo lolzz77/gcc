@@ -13,9 +13,18 @@ hmmm, maybe make a backup of your binaries first?
 Here's the code, make sure you dont copy them twice, imagine you ran `make install` then you copy these files again
 
 ```bash
-cp -r bin/ bin-backup/; cp -r /usr/bin/ /usr/bin-backup/;
+cp -r /bin/ bin-backup/; cp -r /usr/bin/ /usr/bin-backup/;
 ```
 
+Below is to restore the backups, tried it doesnt fix it LMAO
+
+```bash
+cp -r /bin-backup/ bin/; cp -r /usr/bin-backup/ /usr/bin/;
+```
+
+Note:
+
+Tested that, you have to run `make all`, then `make install` only then the gcc will work. Means, loooooonger build time
 
 # Setup
 1. `mkdir ../objdir` (go up 1 directory, is better dont do it in `gcc` directory)

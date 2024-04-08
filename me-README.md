@@ -10,6 +10,12 @@ Cos i did encounter gcc broken, cannot compile
 
 hmmm, maybe make a backup of your binaries first?
 
+Here's the code, make sure you dont copy them twice, imagine you ran `make install` then you copy these files again
+
+```bash
+cp -r bin/ bin-backup/; cp -r /usr/bin/ /usr/bin-backup/;
+```
+
 
 # Setup
 1. `mkdir ../objdir` (go up 1 directory, is better dont do it in `gcc` directory)

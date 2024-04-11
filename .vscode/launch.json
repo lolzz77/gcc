@@ -94,8 +94,8 @@
           "id": "pickProgram",
           "description": "Hmm",
           "type": "pickString",
-          "options": ["/workspace/test.c"],
-          "default": "/workspace/test.c"
+          "options": ["/workspace/test/test.c"],
+          "default": "/workspace/test/test.c"
         }
     ]
 }

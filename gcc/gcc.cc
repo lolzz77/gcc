@@ -3624,7 +3624,7 @@ struct infile
 };
 
 /* Also a vector of input files specified.  */
-
+// infiles contains your c source file to be compiled.
 static struct infile *infiles;
 
 int n_infiles;

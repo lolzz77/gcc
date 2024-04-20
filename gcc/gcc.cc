@@ -1679,7 +1679,7 @@ struct spec_list
     *PTR }
 
 /* List of statically defined specs.  */
-static struct spec_list static_specs[] =
+static struct spec_list static_specs[] = // list of specs
 {
   INIT_STATIC_SPEC ("asm",			&asm_spec),
   INIT_STATIC_SPEC ("asm_debug",		&asm_debug),
@@ -1746,7 +1746,7 @@ static struct spec_list *extra_specs = (struct spec_list *) 0;
 static struct spec_list *specs = (struct spec_list *) 0;
 
 /* List of static spec functions.  */
-
+// list of spec functions
 static const struct spec_function static_spec_functions[] =
 {
   { "getenv",                   getenv_spec_function },
@@ -5602,7 +5602,7 @@ end_going_arg (void)
       const char *string;
 
       obstack_1grow (&obstack, 0);
-      string = XOBFINISH (&obstack, const char *);
+      string = XOBFINISH (&obstack, const char *); // here takes the obstack value to 'string' var
       if (this_is_library_file)
 	string = find_file (string);
       if (this_is_linker_script)
@@ -5967,7 +5967,7 @@ putenv_COLLECT_AS_OPTIONS (vec<char_p> vec)
    Value is zero unless a line was finished
    and the command on that line reported an error.  */
 
-static int
+static int // when you put breakpoint here, the 1st that comes here is setup_spec(), make sure you ignore that, the one that you really cared about is coming from do_spec_on_infiles()
 do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 {
   const char *p = spec;
@@ -8874,7 +8874,7 @@ driver::do_spec_on_infiles () const
 
       /* Figure out which compiler from the file's suffix.  */
 
-      input_file_compiler
+      input_file_compiler //here, get the compiler & their specs
 	= lookup_compiler (infiles[i].name, input_filename_length,
 			   infiles[i].language);
 

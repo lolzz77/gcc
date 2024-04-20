@@ -1,0 +1,29 @@
+{
+	"files": [
+		{
+			"path": "gcc/gcc.cc",
+			"bookmarks": [
+				{
+					"line": 3257,
+					"column": 32,
+					"label": ""
+				},
+				{
+					"line": 6761,
+					"column": 38,
+					"label": ""
+				},
+				{
+					"line": 8131,
+					"column": 24,
+					"label": ""
+				},
+				{
+					"line": 8903,
+					"column": 30,
+					"label": ""
+				}
+			]
+		}
+	]
+}

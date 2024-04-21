@@ -2173,6 +2173,10 @@ store_arg (const char *arg, int delete_always, int delete_failure)
   else
     argbuf.safe_push (arg);
 
+  const char *me_arg;
+  for (int i = 0; argbuf.iterate (i, &me_arg); i++)
+    printf("%s:%s:%d MEE %s\r\n", __FILE__, __FUNCTION__, __LINE__, me_arg);
+
   if (delete_always || delete_failure)
     {
       const char *p;

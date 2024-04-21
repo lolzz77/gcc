@@ -4,23 +4,28 @@
 			"path": "gcc/gcc.cc",
 			"bookmarks": [
 				{
-					"line": 3257,
+					"line": 2170,
+					"column": 13,
+					"label": ""
+				},
+				{
+					"line": 3261,
 					"column": 32,
 					"label": ""
 				},
 				{
-					"line": 6761,
-					"column": 38,
-					"label": ""
-				},
-				{
-					"line": 8131,
+					"line": 8135,
 					"column": 24,
 					"label": ""
-				},
+				}
+			]
+		},
+		{
+			"path": "gcc/vec.h",
+			"bookmarks": [
 				{
-					"line": 8903,
-					"column": 30,
+					"line": 932,
+					"column": 18,
 					"label": ""
 				}
 			]

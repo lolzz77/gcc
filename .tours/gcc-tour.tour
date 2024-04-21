@@ -186,6 +186,26 @@
       "file": "gcc/gcc.cc",
       "description": "it is after this line, the `.o` file has content inside. It was compiled from assembly code to machine code.\n\nbasically, after this line, it will call the binary to execute their shit.",
       "line": 3414
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the iterate() flow. First, here",
+      "line": 3258
+    },
+    {
+      "file": "gcc/vec.h",
+      "description": "then, here",
+      "line": 1751
+    },
+    {
+      "file": "gcc/vec.h",
+      "description": "then, here",
+      "line": 1754
+    },
+    {
+      "file": "gcc/vec.h",
+      "description": "then, here.\n\nThen, the GDB just exited this function lol",
+      "line": 929
     }
   ],
   "ref": "note"

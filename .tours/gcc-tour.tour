@@ -24,18 +24,48 @@
     },
     {
       "file": "gcc/gcc.cc",
+      "description": "the input_file_compiler was assigned here, in a function called prepare_infiles()",
+      "line": 8829
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the return was from function lookup_compiler()",
+      "line": 8816
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the compiler was memcpy from default_compilers",
+      "line": 8310
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "here is the default_compilers",
+      "line": 1401
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "at the time of this note is written, it is running @c compiler",
+      "line": 1429
+    },
+    {
+      "file": "gcc/gcc.cc",
       "description": "ok, next, going into do_spec",
       "line": 5674
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "from what i understand, after all those do_spec shits\nit saves some shits into argbuf argument",
+      "description": "from what i understand, after all those do_spec shits.\n\nit saves some shits into `argbuf` argument.\n\nThen finally in `execute()` function, will take out the argument of `argbuf`.\n\nThen run the commmands like `cc1 -quiet -v -multiarch` etc. The one you see in `gcc -v test.c`",
       "line": 5686
     },
     {
       "file": "gcc/gcc.cc",
       "description": "then later the argbuf value will be used in this execute() function",
       "line": 5691
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "right here",
+      "line": 3251
     },
     {
       "file": "gcc/gcc.cc",
@@ -94,13 +124,18 @@
     },
     {
       "file": "gcc/gcc.cc",
+      "description": "then store the argument",
+      "line": 5621
+    },
+    {
+      "file": "gcc/gcc.cc",
       "description": "then here, it pops the obstack value",
       "line": 5605
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "then store the argument?",
-      "line": 5621
+      "description": "here will push the value to `argbuf`.\n\nBut for some reason, i cant print the values.\n\nMaybe can try `argbuf.iterate (i, &arg)`, and print the value of `arg`",
+      "line": 2174
     },
     {
       "file": "gcc/gcc.cc",
@@ -129,43 +164,28 @@
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "for some reason, i cant print the value of argbuf[0]\n",
+      "description": "now, we have arrived to the point where, all the tokenization is done.\n\nSo now, is time to execute the binaries, the `cc1, as, collect2` binaries.\n\nfor some reason, i cant print the value of argbuf[0].\n\nmaybe you can try `argbuf.iterate (i, &arg)`, print the value of `arg`",
       "line": 3251
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "here the `arg` will be `cc1 -quiet -imultiarch...`\n\nthese command is printed when you do `gcc -v test.c`\n\nHere will use binaries `cc1, as...`\n\nafter `cc1`, the `.s` file will have assembly code\n\nafter `as`, the ",
-      "line": 3258
+      "description": "here the `arg` will be `cc1 -quiet -imultiarch...`\n\nthese command is printed when you do `gcc -v test.c`\n\nHere will use binaries `cc1, as, and collect2`\n\nafter `cc1`, the `.s` file will have assembly code, .s file is generated\n\nafter `as`, the assembly code will be converted into machine code, .o file is generated\n\nthen `collect2` is to link them.",
+      "line": 3258,
+      "selection": {
+        "start": {
+          "line": 3258,
+          "character": 31
+        },
+        "end": {
+          "line": 3258,
+          "character": 55
+        }
+      }
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "it is after this line, the `.o` file has content inside. It was compiled from assembly code to machine code",
+      "description": "it is after this line, the `.o` file has content inside. It was compiled from assembly code to machine code.\n\nbasically, after this line, it will call the binary to execute their shit.",
       "line": 3414
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "the input_file_compiler was assigned here, in a function called prepare_infiles()",
-      "line": 8829
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "the return was from function lookup_compiler()",
-      "line": 8816
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "the compiler was memcpy from default_compilers",
-      "line": 8310
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "here is the default_compilers",
-      "line": 1401
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "at the time of this note is written, it is running @c compiler",
-      "line": 1429
     }
   ],
   "ref": "note"

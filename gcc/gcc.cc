@@ -1259,7 +1259,7 @@ static const char *cpp_debug_options = DUMPS_OPTIONS ("");
 static const char *cc1_options =
 "%{pg:%{fomit-frame-pointer:%e-pg and -fomit-frame-pointer are incompatible}}\
  %{!iplugindir*:%{fplugin*:%:find-plugindir()}}\
- %1 %{!Q:-quiet} %(cpp_debug_options) %{m*} %{aux-info*}\
+ %1 %{!S:-quiet} %(cpp_debug_options) %{m*} %{aux-info*}\
  %{g*} %{O*} %{W*&pedantic*} %{w} %{std*&ansi&trigraphs}\
  %{v:-version} %{pg:-p} %{p} %{f*} %{undef}\
  %{Qn:-fno-ident} %{Qy:} %{-help:--help}\

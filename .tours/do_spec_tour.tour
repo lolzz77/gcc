@@ -1,0 +1,22 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "do_spec_tour",
+  "steps": [
+    {
+      "file": "gcc/gcc.cc",
+      "description": "i have added a printf here.\n\nI found that, when you `gcc test.c`, here will print `-quiet`\n\nIf i put `gcc -Q test.c`, the `-quiet` will be gone.",
+      "line": 2176
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "cos here the spec says, if `-Q` not provided, then substitute `-quiet`.\n\nI have tested, if i put `gcc Q test.c`, the `-quiet` will appear.\n\nI tried to change this to `%{!S:-quiet}`.\n\nThen `make all-gcc -j3` & `make install-gcc -j3`.\n\nThen run with command `gcc -Q test.c`.\n\nI get error `gcc: error: unrecognized command-line option '-Q'`.\n\nIf i run `gcc Q test.c`, no error, and the `-quiet` is printed out.\n\nIf i run `gcc -S test.c`, no error, and NO `-quiet`.\n\nI tried change to `%{!S:-hello}`. I get compile error. \n\nBecause during compilation, they will compile this file and use this file to do further compilation.\n\nAnd because there's no such option such as `-hello`, thus, error, and fail.",
+      "line": 1225
+    },
+    {
+      "file": "../objdir/gcc/specs",
+      "description": "whatever you changed in the `gcc.cc` there, here will reflect.\n\nI tried change here, it doesn't take effect.",
+      "line": 32
+    }
+  ],
+  "ref": "note"
+}

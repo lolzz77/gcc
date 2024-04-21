@@ -4,6 +4,11 @@
 			"path": "gcc/gcc.cc",
 			"bookmarks": [
 				{
+					"line": 1224,
+					"column": 29,
+					"label": ""
+				},
+				{
 					"line": 2170,
 					"column": 13,
 					"label": ""

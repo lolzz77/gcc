@@ -16,6 +16,171 @@
       "file": "../objdir/gcc/specs",
       "description": "whatever you changed in the `gcc.cc` there, here will reflect.\n\nI tried change here, it doesn't take effect.",
       "line": 32
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "I was running a spec like this `cc1 %(cpp_unique_options) %(cc1_options)}}}`\n\nHere, will sub the build-in sepcs `%(cpp_unique_options)` with its value",
+      "line": 6779
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then it reaches here, if you look at the spec\n\n`%{!Q:-quiet} %{nostdinc*}...`.\n\nThe first whitespace, is after `%{!Q:-quiet}`.\n\nSo need find out how it handle the substitution.\n\nEither before this `case`, or inside this `end_going_arg()`",
+      "line": 6037
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "this is the complete spec that contain `%(cpp_unique_options)`",
+      "line": 1442
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then this is the sepc for `%(cpp_unique_options)`",
+      "line": 1225
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "ok so, if you want to find out the substitution flow. First, set breakpoint here.",
+      "line": 6779
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then set 2nd breakpoint here.\n\nThen start your debugging journey.",
+      "line": 2178
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "ok, i got it, so, start from here.\n\nThe spec is `%(cpp_unique_options)`.\n\nSpec value is `%{!Q:-quiet} %{nostdinc*}...`",
+      "line": 6779
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `!Q:-quiet} %{nostdinc*}`\n\nCome in here to handle the bracket",
+      "line": 6664
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `!Q:-quiet} %{nostdinc*}`\n\nFalls here, set to true",
+      "line": 7129
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec `:-quiet} %{nostdinc*}`\n\nfalls here.",
+      "line": 7203
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the spec is `%{!Q:-quiet}`\n\nDid you provide `-Q` in your argument? eg: `gcc -Q test.c`\n\nIf yes, `a_matched` will be TRUE.\n\nElse, False.",
+      "line": 7241
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "is `a_matched` == TRUE.\n\nSet `disj_matched` = TRUE",
+      "line": 7243
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `:-quiet} %{nostdinc*}`\n\nfalls here.",
+      "line": 7253
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `%{!Q:-quiet} %{nostdinc*}`\n\nGo in.",
+      "line": 7257
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `quiet} %{nostdinc*}`\n\nIt will keep falling to here, until `} %{nostdinc*}`",
+      "line": 7332
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec : `} %{nostdinc*}`\n\nfalls here.",
+      "line": 7321
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "done, exit this function.\n\nSpec: ` %{nostdinc*}`\n\nnext is whitespace.",
+      "line": 7257
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: ` %{nostdinc*}`\n\nwhitespace, goes here.",
+      "line": 6037
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "goes here.",
+      "line": 5625
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: ` %{nostdinc*}`\n\nRemeber that, the original spec was `%{!Q:-quiet} %{nostdinc*}`?\n\nthe `-quiet` will be saved here.\n\nThat's how it 'substitute' arguments.",
+      "line": 2174
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "ok, so what if your argument is `gcc -Q test.c`?\n\nYou did provide `-Q`, so, they should not substitute `-quiet`.\n\nSo same, it falls here, loop.\n\nSpec: `quiet} %{nostdinc*}`\n\nbecome `} %{nostdinc*}`",
+      "line": 7332
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then falls here, spec : `} %{nostdinc*}`",
+      "line": 7321
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then it comes back here, from here, press Step In again.",
+      "line": 7257
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "this time, it falls until here",
+      "line": 7335
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then it didnt fall here? hmm...",
+      "line": 7342
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then it jumps to here...",
+      "line": 7264
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then falls here",
+      "line": 7282
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then here.",
+      "line": 6665
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then goes back to loop.",
+      "line": 5986
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then going in here.",
+      "line": 6037
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then straight away come out to here...\n\nhmmm.... ",
+      "line": 6040
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "because the arg_going is 0.\n\nThus, nothing to do in this function.\n\nThus, the debugger straight away go out.",
+      "line": 5604
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then goes back to this loop.\n\nSpec : `%{nostdinc*}...`\n\nI guess that's how it flows. LoL",
+      "line": 5986
     }
   ],
   "ref": "note"

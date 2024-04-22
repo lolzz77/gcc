@@ -24,6 +24,21 @@
     },
     {
       "file": "gcc/gcc.cc",
+      "description": "if `sl`.",
+      "line": 6777
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the `sl` got it from here.",
+      "line": 6766
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "and it got its spec value from here",
+      "line": 1693
+    },
+    {
+      "file": "gcc/gcc.cc",
       "description": "then it reaches here, if you look at the spec\n\n`%{!Q:-quiet} %{nostdinc*}...`.\n\nThe first whitespace, is after `%{!Q:-quiet}`.\n\nSo need find out how it handle the substitution.\n\nEither before this `case`, or inside this `end_going_arg()`",
       "line": 6037
     },

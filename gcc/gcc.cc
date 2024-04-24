@@ -2176,7 +2176,7 @@ store_arg (const char *arg, int delete_always, int delete_failure)
   const char *me_arg;
   int me_vec_size = argbuf.length();
   argbuf.iterate (me_vec_size - 1, &me_arg); // only get the last element in the vector
-  printf("%s:%s:%d MEE %s\r\n", __FILE__, __FUNCTION__, __LINE__, me_arg);
+  printf("%s:%d:%s MEE saved value is : %s\r\n", __FILE__, __LINE__, __FUNCTION__, me_arg);
 
   if (delete_always || delete_failure)
     {
@@ -5975,6 +5975,16 @@ putenv_COLLECT_AS_OPTIONS (vec<char_p> vec)
 static int // when you put breakpoint here, the 1st that comes here is setup_spec(), make sure you ignore that, the one that you really cared about is coming from do_spec_on_infiles()
 do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 {
+  const char *me_p = spec;
+  printf("%s:%d:%s MEE spec is : ", __FILE__, __LINE__, __FUNCTION__);
+  while(*me_p != '\0')
+  {
+    printf("%c", *me_p);
+    me_p++;
+  }
+
+  printf("\r\n");
+
   const char *p = spec;
   int c;
   int i;

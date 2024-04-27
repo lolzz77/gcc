@@ -1,4 +1,4 @@
-https://docs.google.com/presentation/d/1XjvRyp_z_nG9I0qUrYwH2GvE3gMFxP61u-djCF0A4Rg/edit#slide=id.p
+
 
 gcc-11 = gcc version 11
 gcc-ar = archiever, archive == libraries

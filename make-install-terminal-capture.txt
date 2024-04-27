@@ -1,3 +1,8 @@
+This is output captured, from running `make install`
+This is to study what the fuck did install do
+like where the fuck did they install them to
+
+
 root@2275bb86d935:/workspace/gcc/objdir (note)
 releases/gcc-13.2.0-6-g436692043bc : Up-to-date:O Uncommit:Yes Untrack:Yes
 $ make install

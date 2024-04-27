@@ -1,0 +1,12 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "cc1-tour",
+  "steps": [
+    {
+      "file": "gcc/main.cc",
+      "description": "the entry function",
+      "line": 34
+    }
+  ],
+  "ref": "note"
+}

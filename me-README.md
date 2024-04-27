@@ -1,10 +1,16 @@
 All Code:
 ```bash
-apt-get update -y; apt-get upgrade -y; cd /workspace/gcc; ./contrib/download_prerequisites; apt-get install flex cmake gdb -y; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib; make all-gcc -j3
+apt-get update -y; apt-get upgrade -y; cd /workspace/gcc; ./contrib/download_prerequisites; apt-get install flex cmake gdb -y; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib;
 ```
+Then until here, dont make first, go into the /objdir/Makefile
+
+Search for `-O2`, change to `-O0` (This is to disable debug optimization for your debugging experience)
+
+Then run `make all-gcc -j3`
+
 The last step is to `make install-gcc -j3`
 
-But i didnt include it
+But i dont recommend runnning this
 
 Cos i did encounter gcc broken, cannot compile
 
@@ -22,9 +28,13 @@ Below is to restore the backups, tried it doesnt fix it LMAO
 cp -r /bin-backup/ bin/; cp -r /usr/bin-backup/ /usr/bin/;
 ```
 
-Note:
-
 Tested that, you have to run `make all`, then `make install` only then the gcc will work. Means, loooooonger build time
+
+After that, please `cd /workspace`
+
+`git clone https://github.com/lolzz77/test.git`
+
+This file is for your debugging.
 
 # Setup
 1. `mkdir ../objdir` (go up 1 directory, is better dont do it in `gcc` directory)

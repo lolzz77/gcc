@@ -79,8 +79,63 @@
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "done, exit this function.\n\nSpec: ` %{nostdinc*}`\n\nnext is whitespace.",
-      "line": 7273
+      "description": "then break",
+      "line": 7340
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then save string",
+      "line": 7363
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then do_spec_1 with the string `-quiet`",
+      "line": 7366
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `-quiet`, falls here, save current char '-' to obstack.\n\nrepeats until the whole `-quiet` is saved",
+      "line": 6830
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the whole `-quiet` is finsihed, exit while loop, falls here",
+      "line": 6839
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Exit the function, falls here",
+      "line": 7395
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then here",
+      "line": 7398
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "done, exit this function.\n\nSpec: ` %{nostdinc*}`\n\nnext is whitespace.\n\np is not 0 yet",
+      "line": 7275
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "break",
+      "line": 7289
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "return",
+      "line": 7303
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Exit function. p is not 0 yet.",
+      "line": 6681
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Goes back to loop",
+      "line": 6002
     },
     {
       "file": "gcc/gcc.cc",
@@ -89,7 +144,17 @@
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "goes here.",
+      "description": "arg_going is TRUE",
+      "line": 5608
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Remember you saved `-quiet` into obstack? now pop it",
+      "line": 5613
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "save argument",
       "line": 5629
     },
     {
@@ -99,57 +164,42 @@
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "ok, so what if your argument is `gcc -Q test.c`?\n\nYou did provide `-Q`, so, they should not substitute `-quiet`.\n\nSo same, it falls here, loop.\n\nSpec: `quiet} %{nostdinc*}`\n\nbecome `} %{nostdinc*}`",
-      "line": 7337
+      "description": "ok, so what if your argument is `gcc -Q test.c`?\n\nYou did provide `-Q`, so, they should not substitute `-quiet`.\n\nSo this `a_matched` will be TRUE",
+      "line": 7257
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "then it comes back here, from here, press Step In again.\n\nI have no idea how it ends up here again. I was doing next step. Hmm...",
-      "line": 7273
+      "description": "will NOT fall here",
+      "line": 7259
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "this time, it falls until here.\n\nOut of the loop. I dk how it breaks, the stepping in GDB kinda of... weird...",
-      "line": 7351
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "then it didnt fall here? hmm...",
+      "description": "this time, `matched` is false. WILL NOT FALL HERE.",
       "line": 7358
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "then it jumps to here...",
-      "line": 7280
+      "description": "Thus, will not come here, and will not save the string into vector.",
+      "line": 7366
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "then falls here",
-      "line": 7298
+      "description": "Exit",
+      "line": 7398
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "then here.",
-      "line": 6681
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "then goes back to loop.",
+      "description": "Then follow hte same flow as previous one, coming back to here eventually.\n\nspec: ` %{nostdinc*} (there's a leading whitespace",
       "line": 6002
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "then going in here.",
+      "description": "Whitespace, falls here.",
       "line": 6053
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "then straight away come out to here...\n\nhmmm.... ",
-      "line": 6056
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "because the arg_going is 0.\n\nThus, nothing to do in this function.\n\nThus, the debugger straight away go out.",
+      "description": "The arg_going is 0. Nothing to do, exit function.",
       "line": 5608
     },
     {

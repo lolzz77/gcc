@@ -44,8 +44,7 @@
             "stopAtEntry": true,
             "args": [
                 "-Q",
-                "${input:pickProgram}",
-                "-me"
+                "${input:pickProgram}"
             ]
         },
         // {

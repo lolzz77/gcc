@@ -83,6 +83,8 @@ main (int argc, char **argv)
       argv[argc-1][2] == 'e'
    )
    {
+      // gotta remove the argument
+      // else will affect how gcc perform, like, gcc doesn't exepct there's `-me` argument in it
       ME_PRINTF = TRUE;
       argv[argc-1] = NULL;
       argc -= 1;

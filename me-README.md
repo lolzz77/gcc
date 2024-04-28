@@ -2,9 +2,11 @@ All Code:
 ```bash
 apt-get update -y; apt-get upgrade -y; cd /workspace/gcc; ./contrib/download_prerequisites; apt-get install flex cmake gdb -y; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib;
 ```
-Then until here, dont make first, go into the /objdir/Makefile
+Then until here, dont make first, go into the `/objdir/Makefile`
 
-Search for `-O2`, change to `-O0` (This is to disable debug optimization for your debugging experience)
+Search for `-O2`, change to `-O0` 
+(This is to disable debug optimization for your debugging experience)
+https://stackoverflow.com/questions/5497855/what-does-value-optimized-out-mean-in-gdb
 
 Then run `make all -j3` (Takes around 1 hour)
 
@@ -22,9 +24,10 @@ This file is for your debugging uses.
 
 # Note
 1. gcc installed in `/usr/local/bin/gcc`
-2. Try `which gcc` or `whereis gcc`
-3. Verify the version `gcc -v`
-4. Debug ld
+- Try `which gcc` or `whereis gcc`
+- You have to restart your terminal for it to take effect
+- After restarting terminal, verify the version `gcc -v`
+2. Debug ld
 - apparently, `ld` is provided under `gnu binutil`, and the repo name is `gdb bin util`
 - https://www.gnu.org/software/software.html
 - if you scroll to the bottom, you see lots of software names

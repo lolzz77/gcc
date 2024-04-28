@@ -38,11 +38,55 @@ along with GCC; see the file COPYING3.  If not see
 
 extern int main (int, char **);
 
+/**
+ * I use this to control the printf
+ * because if you use printf, it will affect:
+ * - configure script
+ * - make script
+ * They will cause the makefile to contain the printf you put, when you run
+ * During build also will fail because some extra line were added into file
+ * Usage: I only check the last argument got `-me` or not
+ * To enable my printf, put `-me` at the last of the argument
+ * eg: gcc test.c -me
+*/
+int ME_PRINTF = 0;
+
 int
 main (int argc, char **argv)
 {  // MEE Breakpoints
   driver d (false, /* can_finalize */
 	    false); /* debug */
+
+   /**
+    * Pointer study
+    * **argv is double pointer
+    * It holds the address of a pointer
+    * The address is passed into this main function
+    * so whenever you type `argv`, you are accessing the pointer that points to the array.
+    * so is not like the `argv` is the 2nd pointer that points to 1st pointer then points to array
+    * not like this: p2 -> p1 -> array
+    * What's passed into this function, is the address of `p1`
+    * So, by typing `argv[0]`, you are accessin the array already
+    * I found that, by typing `*argv[0]`, you are accessing the 1st char of the 1st element of array
+    * eg: ['/usr/gcc','/workspace/test.c',]
+    * argv[0] = 0x7fffffffe442 "/usr/gcc"
+    * argv[1] = 0x7fffffffe455 "/workspace/test.c"
+    * *argv[0] = "/" (this is pointing the 1st char of the 1st element of array ("/usr/gcc"))
+    * *argv[1] = "/" (This is pointing the 1st char of the 2nd element of array ("/workspace/test.c"))
+    * argv[0][0] = 47 '/' (The 1st char of the 1st element of the array ("/usr/gcc"))
+    * *argv[0][0] = no such thing
+    * TBH, i dk how argv[0] works, it returns address of the element of the array? Then stops until null termination?
+   */
+   if(
+      argv[argc-1][0] == '-' &&
+      argv[argc-1][1] == 'm' &&
+      argv[argc-1][2] == 'e'
+   )
+   {
+      ME_PRINTF = TRUE;
+      argv[argc-1] = NULL;
+      argc -= 1;
+   }
 
   return d.main (argc, argv);
 }

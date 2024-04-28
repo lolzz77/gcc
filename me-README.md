@@ -18,6 +18,12 @@ Your installation will success, but when you trigger `gcc`, will fail during lin
 
 I think is because the existing linkers are not compatible with the version you built.
 
+You can just run `make all-gcc -j3; make install-gcc -j3`,
+
+but only after you ran `make all -j3; make install -j3`.
+
+This is to ensure that all other binaries like `ld`, are compatible with your `gcc`.
+
 After that, please `cd /workspace; git clone https://github.com/lolzz77/test.git`
 
 This file is for your debugging uses.

@@ -54,108 +54,18 @@
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "from what i understand, after all those do_spec shits.\n\nit saves some shits into `argbuf` argument.\n\nThen finally in `execute()` function, will take out the argument of `argbuf`.\n\nThen run the commmands like `cc1 -quiet -v -multiarch` etc. The one you see in `gcc -v test.c`",
-      "line": 5694
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "then later the argbuf value will be used in this execute() function",
-      "line": 5699
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "right here",
-      "line": 3259
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "ok, next, this probably the main tokenization function",
+      "description": "ok, next, this probably the main tokenization function.\n\nNow, i wont walk thru how the tokenization goes.\n\nToo many shits, I have separate tour for this.",
       "line": 5979
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "the outer switch, inside got another inner switch, that is to handle '{}' specs\n\ncase '\\n'\n\ncase '|'\n\ncase '\\t':\n\ncase ' ':\n\ncase '%':\n\n----here got another switch\n\ncase '\\\\':\n\ncase ''\n\ndefault:\n\n----here will saves the text into variable called obstack",
-      "line": 6005
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "the inner switch\n\ncase 0\n\ncase 'b'\n\ncase 'B'\n\ncase 'd'\n\ncase 'D'\n\ncase 'e'\n\ncase 'n'\n\ncase 'j'\n\ncase '|'\n\ncase 'm'\n\ncase 'g'\n\ncase 'u'\n\ncase 'U'\n\ncase 'i'\n\ncase 'I'\n\ncase 'o'\n\ncase 'O'\n\ncase 's'\n\ncase 'T'\n\ncase 'V'\n\ncase 'w'\n\ncase 'W'\n\ncase '@'\n\ncase 'x'\n\ncase 'X'\n\ncase 'Y'\n\ncase 'Z'\n\ncase '1'\n\ncase '2'\n\ncase 'a'\n\ncase 'A'\n\ncase 'C'\n\ncase 'E'\n\ncase 'l'\n\ncase 'M'\n\ncase 'G'\n\ncase 'R'\n\ncase 'S'\n\ncase '{'\n\n----this one probably quite frequent gets triggered, handle_braces()\n\ncase ':'\n\n----this one probably quite frequent gets triggered, substitution operation\n\ncase '%'\n\ncase '.'\n\ncase '<'\n\ncase '>'\n\ncase '*'\n\ncase '('\n\ncase '\"'\n\ndefault",
-      "line": 6063
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "after that, these functions will be called recursively, inside these function also got call do_spec_1()",
-      "line": 7273
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "somewhere after running numerous of steps.\nReaching here.\nIt macam expand %(cc1_options) to the specs.",
-      "line": 6795
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "this is the specs im talking about",
-      "line": 1260
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "then, the next callstack trace back i saw is here.\nHere the p will point to 'dumps()'.\nThis value is from a spec cpp_debug_options.",
-      "line": 6684
-    },
-    {
-      "file": "../objdir/gcc/specs",
-      "description": "this is the spec im talking about",
-      "line": 29
-    },
-    {
-      "file": "../objdir/gcc/specs",
-      "description": "ok, make sense why it suddenly go to cpp_debug_options, inside this spec, i do see cpp_debug_options.",
-      "line": 41
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "here will evaluate. The 'func' var holds the value 'dumps'.\nAfter function return, the 'funcval' variable has the value '-dumpdir a- -dumpbase test.c -dumpbase-ext .c'",
-      "line": 6998
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "i think, after this line, obstack will have value",
-      "line": 5612
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "then store the argument",
+      "description": "basically, after all that `do_spec` shit, will come here.\n\nHere is to store the argument into vector.\n\nTo be later used by `execute()` function to get their argument.\n\nAnd execute the driver.",
       "line": 5629
     },
     {
       "file": "gcc/gcc.cc",
-      "description": "then here, it pops the obstack value",
-      "line": 5613
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "here will push the value to `argbuf`.\n\nBut for some reason, i cant print the values.\n\nMaybe can try `argbuf.iterate (i, &arg)`, and print the value of `arg`",
+      "description": "Here, saves the argument to the vector.\n\nfrom what i understand, after all those do_spec shits.\n\nit saves some shits into `argbuf` argument.\n\nThen finally in `execute()` function, will take out the argument of `argbuf`.\n\nThen run the commmands like `cc1 -quiet -v -multiarch` etc. The one you see in `gcc -v test.c`",
       "line": 2174
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "this line wil add per character into obstack. While the loop still going, will keep stacking characters onto this obstack.",
-      "line": 6830
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "if my specs is '-dumpdir a-'.\n\ndue to the loop, '-dumpdir' will be stacked onto obstack variable.\n\nThen, on the whitespace, will come here.\n\nIn this function, will pop the '-dumpdir' from the obstack.",
-      "line": 6053
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "handle braces inside also got switch\n\ncase '&': case '}':\n\ncase '|': case ':':",
-      "line": 7203
-    },
-    {
-      "file": "gcc/gcc.cc",
-      "description": "switches are assigned here.\n\nI have no idea where this switches gets it's value from",
-      "line": 3863
     },
     {
       "file": "gcc/gcc.cc",

@@ -43,6 +43,7 @@
             "cwd" : "/workspace/gcc/",
             "stopAtEntry": true,
             "args": [
+                "-Q",
                 "${input:pickProgram}",
                 "-me"
             ]

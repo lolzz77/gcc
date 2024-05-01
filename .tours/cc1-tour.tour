@@ -6,6 +6,66 @@
       "file": "gcc/main.cc",
       "description": "the entry function",
       "line": 34
+    },
+    {
+      "file": "gcc/c-family/c-opts.cc",
+      "description": "here, you can do `fileno(out_stream)`\n\nI get `3`, means, this is new file descritpor,\n\nFile descriptor 0,1,2 are reserved, `0` - stdin, `1` - stdout, `2` - stderr.\n\nIf `3`, means this is new file descriptor, usually `open(flie_name, 'w')` etc",
+      "line": 1116
+    },
+    {
+      "file": "gcc/toplev.cc",
+      "description": "after this line, `a-test.i` file is created. But no content.\n\n`no_backend` is TRUE.",
+      "line": 2274
+    },
+    {
+      "file": "gcc/toplev.cc",
+      "description": "after this line, `a-test.i` file has content",
+      "line": 2280
+    },
+    {
+      "file": "gcc/toplev.cc",
+      "description": "after this line, `a-test.i` has content.",
+      "line": 2110
+    },
+    {
+      "file": "gcc/toplev.cc",
+      "description": "after this line, `a-test.i` has content",
+      "line": 1815
+    },
+    {
+      "file": "gcc/c/c-objc-common.cc",
+      "description": "here",
+      "line": 67
+    },
+    {
+      "file": "gcc/c-family/c-opts.cc",
+      "description": "after this line, `a-test.i` has content.",
+      "line": 1228
+    },
+    {
+      "file": "gcc/c-family/c-ppoutput.cc",
+      "description": "straight falls here, after this line, `a-test.i` has content.",
+      "line": 106
+    },
+    {
+      "file": "gcc/c-family/c-ppoutput.cc",
+      "description": "here",
+      "line": 351
+    },
+    {
+      "file": "gcc/c-family/c-ppoutput.cc",
+      "description": "this line prints the content into the `a-test.i` file",
+      "line": 319
+    },
+    {
+      "file": "libcpp/lex.cc",
+      "description": "this line prints the value to the file.\n\nBut only after few loops",
+      "line": 4507
+    },
+    {
+      "file": "libcpp/lex.cc",
+      "description": "the reason why after `fputc`, the file has no content, \n\nis because there's something called `Buffered vs Unbuffered stream`\n\n`stdout` usually is `line-buffered`, \n\nwhich means print to terminal after encountering newline.\n\nfile stream on the other hand, usuaully is `fully buffered`,\n\nwhich means flush to file after the buffer is fulled.\n\nTo ensure it flush to file, use `fflush` to flush it.",
+      "line": 4508
     }
   ],
   "ref": "note"

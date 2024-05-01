@@ -41,8 +41,8 @@ struct token_spelling
 static const unsigned char *const digraph_spellings[] =
 { UC"%:", UC"%:%:", UC"<:", UC":>", UC"<%", UC"%>" };
 
-#define OP(e, s) { SPELL_OPERATOR, UC s  },
-#define TK(e, s) { SPELL_ ## s,    UC #e },
+#define OP(e, s) { SPELL_OPERATOR, UC s  }, // translate to: { fixed to SPELL_OPERATOR enum, the "s" character }
+#define TK(e, s) { SPELL_ ## s,    UC #e }, // translate to: { replace whatever given by `s`, with SPELL_s, replace whatever given by `e`, with "e" }
 static const struct token_spelling token_spellings[N_TTYPES] = { TTYPE_TABLE };
 #undef OP
 #undef TK
@@ -4520,6 +4520,7 @@ cpp_output_token (const cpp_token *token, FILE *fp)
       /* An error, most probably.  */
       break;
     }
+  fflush(fp);
 }
 
 /* Compare two tokens.  */

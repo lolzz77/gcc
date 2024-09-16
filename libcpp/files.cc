@@ -967,7 +967,7 @@ _cpp_stack_file (cpp_reader *pfile, _cpp_file *file, include_type type,
 
       /* Stack the buffer.  */
       cpp_buffer *buffer
-	= cpp_push_buffer (pfile, file->buffer, file->st.st_size,
+	= cpp_push_buffer (pfile, file->buffer, file->st.st_size, // MEE breakpoints. Here, add 'parse_in' into watch, the parse_in->buffer->next_line is showing the code of the file to be compiled
 			   CPP_OPTION (pfile, preprocessed)
 			   && !CPP_OPTION (pfile, directives_only));
       buffer->file = file;
@@ -1681,6 +1681,7 @@ void
 cpp_set_include_chains (cpp_reader *pfile, cpp_dir *quote, cpp_dir *bracket,
 			int quote_ignores_source_dir)
 {
+  // this is where it puts the include path into pfile->quote_include
   pfile->quote_include = quote;
   pfile->bracket_include = quote;
   pfile->quote_ignores_source_dir = quote_ignores_source_dir;

@@ -22,7 +22,7 @@ along with GCC; see the file COPYING3.  If not see
 
 #include "version.h"
 #include "diagnostic-core.h"
-
+extern int ME_PRINTF;
 /* The top-level "main" within the driver would be ~1000 lines long.
    This class breaks it up into smaller functions and contains some
    state shared by them.  */

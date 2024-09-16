@@ -1,0 +1,139 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // {
+        //     // i find `gcc -v` uses `/usr/local/libexec/gcc/x86_64-pc-linux-gnu/13.2.0/cc1`
+        //     // so this comment out to reduce confusion
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "name": "GCC DEBUG - cc1.out",
+        //     "program": "/workspace/objdir/gcc/cc1", // objdir is situational, find where the `cc1` is and modify this path
+        //     "cwd" : "/workspace/test/",
+        //     "stopAtEntry": true,
+        //     "args": [
+        //         "-E",
+        //         "-v",
+        //         "-imultiarch",
+        //         "x86_64-linux-gnu",
+        //         "test.c",
+        //         "-mtune=generic",
+        //         "-march=x86-64",
+        //         "-fpch-preprocess",
+        //         "-o",
+        //         "a-test.i"
+        //     ]
+        // },
+        {
+            // for this one, i have to use /usr/local/bin/gcc
+            // rather than using /workspace/gcc/objdir/gcc/xgcc
+            // cos it will complain cannot find cc1
+            // apparently, it will go to some certain location to find cc1,
+            // instead of finding it in the same directory
+
+            // as for the output 'a.out' file,
+            // it will be outputted at path stated in "cwd"
+            // that is, /workspace/gcc/
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "GCC DEBUG - gcc",
+            "program": "/usr/local/bin/gcc",  // `gcc` location is situational, find where the `gcc` is using `where gcc`
+            "cwd" : "/workspace/gcc/",
+            "stopAtEntry": true,
+            "args": [
+                "-Q",
+                "${input:pickProgram}"
+            ]
+        },
+        // {
+        //     // How to find out which file it runs & set breakpoint
+        //     // run 'gdb -tui /workspace/gcc/objdir/gcc/xg++'
+        //     // inside GDB, run 'b main'
+        //     // 'r'
+        //     // then, u can see which file it runs
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "name": "GCC DEBUG - xg++",
+        //     "program": "/workspace/objdir/gcc/xg++", // objdir is situational, find where the `xg++` is and modify this path
+        //     "cwd" : "/workspace/gcc/",
+        //     "stopAtEntry": true,
+        //     "args": [
+        //         "${input:pickProgram}"
+        //     ]
+        // },
+        // {
+            // This wont work, to run .c file, you need to compile it into executable first
+            // i'll just leave this here.
+            // "type": "cppdbg",
+            // "request": "launch",
+            // "name": "GCC DEBUG - main.cc",
+            // "program": "/workspace/gcc/gcc/main.cc",
+            // "cwd" : "/workspace/gcc/",
+            // "stopAtEntry": true,
+            // "args": [
+            //     "${input:pickProgram}"
+            // ]
+        // },
+        // {
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "name": "GCC DEBUG - x86_64-pc-linux-gnu-gcc",
+        //     "program": "/usr/local/bin/x86_64-pc-linux-gnu-gcc", // I found this one using `inotifywait -m -r -e move / &`
+        //     "cwd" : "/workspace/objdir/",
+        //     "stopAtEntry": true,
+        //     "args": [
+        //         "-v",
+        //         "${input:pickProgram}"
+        //     ]
+        // },
+        {
+            // this cc1 path is from `gcc -v`
+            // please run this after you have ran `gcc -save-temps -v test.c`
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "GCC DEBUG - cc1",
+            "program": "/usr/local/libexec/gcc/x86_64-pc-linux-gnu/13.2.0/cc1",
+            "cwd" : "/workspace/test/",
+            "stopAtEntry": true,
+            "args": [
+                "-E",
+                "-quiet",
+                "-v",
+                "-imultiarch",
+                "x86_64-linux-gnu",
+                "test.c",
+                "-mtune=generic",
+                "-march=x86-64",
+                "-g",
+                "-fworking-directory",
+                "-O0",
+                "-fpch-preprocess",
+                "-o",
+                "a-test.i"
+            ]
+        },
+        {
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "GCC DEBUG - collect2",
+            "program": "/usr/local/libexec/gcc/x86_64-pc-linux-gnu/13.2.0/collect2", // I found this one using `inotifywait -m -r -e move / &`
+            "cwd" : "/workspace/objdir/",
+            "stopAtEntry": true,
+            "args": [
+                "${input:pickProgram}"
+            ]
+        },
+        
+    ],
+    "inputs": [
+        {
+          "id": "pickProgram",
+          "description": "Hmm",
+          "type": "pickString",
+          "options": ["/workspace/test/test.c"],
+          "default": "/workspace/test/test.c"
+        }
+    ]
+}

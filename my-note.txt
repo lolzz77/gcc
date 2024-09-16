@@ -1,0 +1,297 @@
+
+
+gcc-11 = gcc version 11
+gcc-ar = archiever, archive == libraries
+gcc-nm = to list out list of symbols
+
+
+1. /workspace/gcc/objdir/Makefile
+2. /workspace/gcc/objdir/gcc/Makefile
+
+
+
+
+
+$(MAKE) $(RECURSE_FLAGS_TO_PASS) installdirs install-host install-target
+
+
+
+
+
+
+
+FROM: /workspace/gcc/objdir/Makefile
+.PHONY: install-host
+install-host:  \
+    maybe-install-bfd \
+    maybe-install-opcodes \
+    maybe-install-binutils \
+    maybe-install-bison \
+    maybe-install-cgen \
+    maybe-install-dejagnu \
+    maybe-install-etc \
+    maybe-install-fastjar \
+    maybe-install-fixincludes \ <- yes, got further detail
+    maybe-install-flex \
+    maybe-install-gas \
+    maybe-install-gcc \ <- yes, got further detail
+    maybe-install-gmp \ <- yes, but further, no
+    maybe-install-mpfr \ <- yes, but further, no
+    maybe-install-mpc \ <- yes, but further, no
+    maybe-install-isl \ <- yes, but further, no
+    maybe-install-gold \
+    maybe-install-gprof \
+    maybe-install-intl \ <- yes, got further detail
+    maybe-install-tcl \
+    maybe-install-itcl \
+    maybe-install-ld \
+    maybe-install-libbacktrace \ <- yes, got further detail
+    maybe-install-libcpp \ <- yes, got further detail
+    maybe-install-libcody \ <- yes, but further, no
+    maybe-install-libdecnumber \ <- yes, got further detail
+    maybe-install-libgui \
+    maybe-install-libiberty \ <- yes, got further detail
+    maybe-install-libiberty-linker-plugin \
+    maybe-install-libiconv \
+    maybe-install-m4 \
+    maybe-install-readline \
+    maybe-install-sid \
+    maybe-install-sim \
+    maybe-install-texinfo \
+    maybe-install-zlib \ <- yes, but further, no
+    maybe-install-gnulib \
+    maybe-install-gdbsupport \
+    maybe-install-gdbserver \
+    maybe-install-gdb \
+    maybe-install-expect \
+    maybe-install-guile \
+    maybe-install-tk \
+    maybe-install-libtermcap \
+    maybe-install-utils \
+    maybe-install-c++tools \ <- yes, got further detail
+    maybe-install-gnattools \
+    maybe-install-lto-plugin \ <- yes, got further detail
+    maybe-install-libcc1 \ <- yes, got further detail
+    maybe-install-gotools \
+    maybe-install-libctf \
+    maybe-install-libsframe
+
+
+
+FROM: /workspace/gcc/objdir/gcc/Makefile
+install: install-common $(INSTALL_HEADERS) \
+    install-cpp install-man install-info install-po \
+    install-driver install-lto-wrapper install-gcc-ar
+
+
+
+
+FROM: /workspace/gcc/objdir/Makefile
+$(SHELL) $(srcdir)/mkinstalldirs $(MAKEDIRS)
+/bin/bash /workspace/gcc/objdir/../mkinstalldirs /usr/local /usr/local
+
+
+
+FROM: /workspace/gcc/mkinstalldirs
+
+
+
+
+findn cc1
+./usr/lib/gcc/x86_64-linux-gnu/11/cc1
+./usr/local/libexec/gcc/x86_64-pc-linux-gnu/13.2.0/cc1 <- if u remove this, the gcc from /usr/local/bin/gcc will have error unable to find cc1
+find: './proc/102468': No such file or directory
+./workspace/gcc/objdir/stage1-gcc/cc1
+./workspace/gcc/objdir/gcc/cc1
+./workspace/gcc/objdir/prev-gcc/cc1
+
+
+
+
+
+
+
+
+
+
+
+// compiler spec
+%{
+    E|M|MM:
+    %(trad_capable_cpp)
+    %(cpp_options)
+    %(cpp_debug_options)
+}
+
+%{
+    !E:
+    %{
+        !M:
+        %{
+            !MM:
+            %{
+                traditional:%eGNU C no longer supports -traditional without -E
+            }
+            %{
+                save-temps*|traditional-cpp|no-integrated-cpp:
+                %(trad_capable_cpp) \t
+                %(cpp_options) -o
+                %{save-temps*:%b.i}
+                %{!save-temps*:%g.i} \n\t    cc1 -fpreprocessed
+                %{save-temps*:%b.i}
+                %{!save-temps*:%g.i} \t
+                %(cc1_options)
+            }
+            %{
+                !save-temps*:
+                %{
+                    !traditional-cpp:
+                    %{
+                        !no-integrated-cpp:\t  cc1
+                        %(cpp_unique_options)
+                        %(cc1_options)
+                    }
+                }
+            }
+            %{
+                !fsyntax-only:%(invoke_as)
+            }
+        }
+    }
+}
+
+
+
+
+// linker spec
+%{
+    !fsyntax-only:
+    %{
+        !c:
+        %{
+            !M:
+            %{
+                !MM:
+                %{
+                    !E:
+                    %{
+                        !S:
+                        %(linker)
+                        %{
+                            !fno-use-linker-plugin:
+                            %{
+                                !fno-lto:     -plugin
+                                %(linker_plugin_file)
+                                -plugin-opt=%(lto_wrapper)
+                                -plugin-opt=-fresolution=%u.res
+                                %{
+                                    flinker-output=*:-plugin-opt=-linker-output-known
+                                }
+                                %{
+                                    !nostdlib:
+                                    %{
+                                        !nodefaultlibs:%:pass-through-libs(%(link_gcc_c_sequence))
+                                    }
+                                }
+                            }
+                        }
+                        %{
+                            flto|flto=*:%<fcompare-debug*
+                        }
+                        %{flto}
+                        %{fno-lto}
+                        %{flto=*}
+                        %l
+                        %{static|shared|r:;pie:-pie}
+                        %{fuse-ld=*:-fuse-ld=%*}
+                        %{gz|gz=zlib:--compress-debug-sections=zlib}
+                        %{gz=none:--compress-debug-sections=none}
+                        %{gz=zstd:%e-gz=zstd is not supported in this configuration}
+                        %{gz=zlib-gnu:}%X %{o*} %{e*} %{N} %{n} %{r}    %{s} %{t} %{u*} %{z} %{Z}
+                        %{!nostdlib:%{!r:%{!nostartfiles:%S}}}
+                        %{static|no-pie|static-pie:} %@{L*} %(mfwrap) %(link_libgcc)
+                        %{fvtable-verify=none:}
+                        %{fvtable-verify=std:
+                        %e-fvtable-verify=std is not supported in this configuration}
+                        %{fvtable-verify=preinit:%e-fvtable-verify=preinit is not supported in this configuration}
+                        %{
+                            !nostdlib:%{
+                                !r:%{
+                                    !nodefaultlibs:%{%:sanitize(address):%{!shared:libasan_preinit%O%s}
+                                    %{static-libasan:%{!shared:-Bstatic --whole-archive -lasan --no-whole-archive -Bdynamic}}
+                                    %{!static-libasan:-lasan}}
+                                    %{%:sanitize(hwaddress):%{!shared:libhwasan_preinit%O%s}
+                                    %{static-libhwasan:%{!shared:-Bstatic --whole-archive -lhwasan --no-whole-archive -Bdynamic}}%{!static-libhwasan:-lhwasan}}
+                                    %{%:sanitize(thread):%{!shared:libtsan_preinit%O%s}
+                                    %{static-libtsan:%{!shared:-Bstatic --whole-archive -ltsan --no-whole-archive -Bdynamic}}%{!static-libtsan:-ltsan}}
+                                    %{
+                                        %:sanitize(leak):%{!shared:liblsan_preinit%O%s}
+                                        %{
+                                            static-liblsan:%{!shared:-Bstatic --whole-archive -llsan --no-whole-archive -Bdynamic}
+                                        }
+                                        %{!static-liblsan:-llsan}
+                                    }
+                                }
+                            }
+                        } %o
+                        %{fopenacc|fopenmp|%:gt(%{ftree-parallelize-loops=*:%*} 1):\t%:include(libgomp.spec)%(link_gomp)}
+                        %{fgnu-tm:%:include(libitm.spec)%(link_itm)}    %(mflib)  %{fsplit-stack: --wrap=pthread_create}
+                        %{fprofile-arcs|fprofile-generate*|coverage:-lgcov}
+                        %{
+                            !nostdlib:%{
+                                !r:%{
+                                    !nodefaultlibs:%{%:sanitize(address): %{static-libasan|static:%:include(libsanitizer.spec)%(link_libasan)}
+                                    %{static:%ecannot specify -static with -fsanitize=address}}
+                                    %{%:sanitize(hwaddress): %{static-libhwasan|static:%:include(libsanitizer.spec)%(link_libhwasan)}\t%{static:%ecannot specify -static with -fsanitize=hwaddress}}
+                                    %{%:sanitize(thread): %{static-libtsan|static:%:include(libsanitizer.spec)%(link_libtsan)}
+                                    %{static:%ecannot specify -static with -fsanitize=thread}}
+                                    %{%:sanitize(undefined):%{static-libubsan:-Bstatic} -lubsan %{static-libubsan:-Bdynamic}
+                                    %{static-libubsan|static:%:include(libsanitizer.spec)%(link_libubsan)}}
+                                    %{
+                                        %:sanitize(leak): %{static-liblsan|static:%:include(libsanitizer.spec)%(link_liblsan)}
+                                    }
+                                }
+                            }
+                        }
+                        %{!nostdlib:%{!r:%{!nodefaultlibs:%(link_ssp) %(link_gcc_c_sequence)}}}
+                        %{!nostdlib:%{!r:%{!nostartfiles:%E}}} %{T*}  \n%(post_link)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+%{!fwpa*:   %{fcompare-debug=*|fdump-final-insns=*:%:compare-debug-dump-opt()}   %{!S:-o %|.s |\n as %(asm_options) %m.s %A }  }
+
+
+
+
+
+
+
+
+
+
+
+
+# trying to print all traces, including those that alreayd finished, and output to a file
+
+If your program is already running, attach GDB to it using the process ID (PID). In the GDB prompt, execute the following commands:
+gdb <your_executable> <PID>
+(gdb) thread apply all bt
+
+
+If you have a core dump file (created when your program crashes), you can analyze it with GDB.
+Run GDB with the core dump and execute the following commands:
+gdb <your_executable> <core_dump_file>
+(gdb) thread apply all bt
+
+
+
+ gdb /usr/local/bin/x86_64-pc-linux-gnu-gcc -ex "thread apply all bt" -ex "file /workspace/test.out" -ex "r" -ex "detach" -ex "quit" > resu
+lt-print-all-traces.txt

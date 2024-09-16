@@ -617,9 +617,9 @@ pex_unix_exec_child (struct pex_obj *obj, int flags, const char *executable,
 
   for (retries = 0; retries < 4; ++retries)
     {
-      pid = vfork ();
-      if (pid >= 0)
-	break;
+      pid = vfork (); // MEE breakpoint, here execute list of program, check `executable` variables
+      if (pid >= 0) // If gcc, it will call cc1, as, and collect2.
+	break; // If collect2, it will call ld. If you looking to debug ld, see me-README, find keyword 'debug ld'
       sleep (sleep_interval);
       sleep_interval *= 2;
     }

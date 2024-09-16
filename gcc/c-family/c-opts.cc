@@ -803,6 +803,7 @@ c_common_post_options (const char **pfilename)
 
   sanitize_cpp_opts ();
 
+  // here will put parse_in->quote_include to have the include value
   register_include_chains (parse_in, sysroot, iprefix, imultilib,
 			   std_inc, std_cxx_inc && c_dialect_cxx (), verbose);
 
@@ -1116,7 +1117,7 @@ c_common_post_options (const char **pfilename)
     }
   else
     {
-      init_c_lex ();
+      init_c_lex (); // MEE breakpoint, initialize C lex
 
       /* When writing a PCH file, avoid reading some other PCH file,
 	 because the default address space slot then can't be used
@@ -1165,7 +1166,7 @@ c_common_post_options (const char **pfilename)
 				       c_common_input_charset_cb, true);
   input_location = UNKNOWN_LOCATION;
 
-  *pfilename = this_input_filename
+  *pfilename = this_input_filename // MEE breakpoints
     = cpp_read_main_file (parse_in, in_fnames[0],
 			  /* We'll inject preamble pieces if this is
 			     not preprocessed.  */
@@ -1233,6 +1234,7 @@ c_common_init (void)
 
 /* Initialize the integrated preprocessor after debug output has been
    initialized; loop over each input file.  */
+// start of compiling files?
 void
 c_common_parse_file (void)
 {
@@ -1245,7 +1247,7 @@ c_common_parse_file (void)
       dumps->dump_start (TDI_original, &dump_flags);
       pch_init ();
       push_file_scope ();
-      c_parse_file ();
+      c_parse_file (); // MEE breakpoints
       pop_file_scope ();
       /* And end the main input file, if the debug writer wants it  */
       if (debug_hooks->start_end_main_source_file)

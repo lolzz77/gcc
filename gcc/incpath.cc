@@ -503,7 +503,7 @@ register_include_chains (cpp_reader *pfile, const char *sysroot,
 
   target_c_incpath.extra_includes (sysroot, iprefix, stdinc);
 
-  merge_include_chains (sysroot, pfile, verbose);
+  merge_include_chains (sysroot, pfile, verbose); // MEE breakpoints, this is where it setup include path, then later asssign it to pfile
 
   cpp_set_include_chains (pfile, heads[INC_QUOTE], heads[INC_BRACKET],
 			  quote_ignores_source_dir);

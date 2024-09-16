@@ -919,7 +919,7 @@ c_cpp_builtins (cpp_reader *pfile)
     return;
 
   define_language_independent_builtin_macros (pfile);
-
+  // here deinfe a lot of shits too
   /* encoding definitions used by users and libraries  */
   builtin_define_with_value ("__GNUC_EXECUTION_CHARSET_NAME",
     cpp_get_narrow_charset_name (pfile), 1);
@@ -1630,7 +1630,7 @@ c_cpp_builtins (cpp_reader *pfile)
      one attribute, say __declspec__, and passing args to it.  The
      problem with that approach is that args are not accumulated: each
      new appearance would clobber any existing args.  */
-  if (TARGET_DECLSPEC)
+  if (TARGET_DECLSPEC) // MEE breakpoints, here probably will be the last of all defines, after this line, 'parse_in'->all_files->name will be changed from the file u compile, to a header file
     builtin_define ("__declspec(x)=__attribute__((x))");
 
   /* If decimal floating point is supported, tell the user if the

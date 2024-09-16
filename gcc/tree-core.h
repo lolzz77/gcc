@@ -1056,7 +1056,7 @@ struct GTY(()) tree_base {
     /* The bits in the following structure should only be used with
        accessor macros that constrain inputs with tree checking.  */
     struct {
-      unsigned lang_flag_0 : 1;
+      unsigned lang_flag_0 : 1; // here is the lang_flag_0
       unsigned lang_flag_1 : 1;
       unsigned lang_flag_2 : 1;
       unsigned lang_flag_3 : 1;
@@ -1080,7 +1080,7 @@ struct GTY(()) tree_base {
 	 of the field must be large enough to hold addr_space_t values.
 	 For CONSTRUCTOR nodes this holds the clobber_kind enum.  */
       unsigned address_space : 8;
-    } bits;
+    } bits; // here is the bits
 
     /* The following fields are present in tree_base to save space.  The
        nodes using them do not require any of the flags above and so can
@@ -1141,7 +1141,7 @@ struct GTY(()) tree_base {
       unsigned short clique;
       unsigned short base;
     } dependence_info;
-  } GTY((skip(""))) u;
+  } GTY((skip(""))) u; // here is the 'u', union
 };
 
 /* The following table lists the uses of each of the above flags and

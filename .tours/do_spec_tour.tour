@@ -1,0 +1,222 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "do_spec_tour",
+  "steps": [
+    {
+      "file": "gcc/gcc.cc",
+      "description": "I was running a spec like this `cc1 %(cpp_unique_options) %(cc1_options)}}}`\n\nHere, will sub the build-in sepcs `%(cpp_unique_options)` with its value",
+      "line": 6795
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "this is the complete spec that contain `%(cpp_unique_options)`",
+      "line": 1442
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "if `sl`.",
+      "line": 6793
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the `sl` got it from here.",
+      "line": 6782
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "and it got its spec value from here",
+      "line": 1693
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "The value of `%(cpp_unique_options)`",
+      "line": 1225
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "ok, back to here. So,\n\nThe spec is `%(cpp_unique_options)`.\n\nSpec value is `%{!Q:-quiet} %{nostdinc*}...`",
+      "line": 6795
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `!Q:-quiet} %{nostdinc*}`\n\nCome in here to handle the bracket",
+      "line": 6679
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `!Q:-quiet} %{nostdinc*}`\n\nFalls here, set to true",
+      "line": 7145
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec `:-quiet} %{nostdinc*}`\n\nfalls here.",
+      "line": 7218
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the spec is `%{!Q:-quiet}`\n\nDid you provide `-Q` in your argument? eg: `gcc -Q test.c`\n\nIf yes, `a_matched` will be TRUE.\n\nElse, False.",
+      "line": 7257
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "is `a_matched` == TRUE.\n\nSet `disj_matched` = TRUE",
+      "line": 7261
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `:-quiet} %{nostdinc*}`\n\nfalls here.",
+      "line": 7273
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `quiet} %{nostdinc*}`\n\nIt will keep falling to here, until `} %{nostdinc*}`",
+      "line": 7348
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec : `} %{nostdinc*}`\n\nfalls here.",
+      "line": 7337
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then break",
+      "line": 7340
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then save string",
+      "line": 7363
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then do_spec_1 with the string `-quiet`",
+      "line": 7366
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: `-quiet`, falls here, save current char '-' to obstack.\n\nrepeats until the whole `-quiet` is saved",
+      "line": 6830
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the whole `-quiet` is finsihed, exit while loop, falls here",
+      "line": 6839
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Exit the function, falls here",
+      "line": 7395
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then here",
+      "line": 7398
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "done, exit this function.\n\nSpec: ` %{nostdinc*}`\n\nnext is whitespace.\n\np is not 0 yet",
+      "line": 7275
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "break",
+      "line": 7289
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "return",
+      "line": 7303
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Exit function. p is not 0 yet.",
+      "line": 6681
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Goes back to loop",
+      "line": 6002
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: ` %{nostdinc*}`\n\nwhitespace, goes here.",
+      "line": 6053
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "arg_going is TRUE",
+      "line": 5608
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Remember you saved `-quiet` into obstack? now pop it",
+      "line": 5613
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "save argument",
+      "line": 5629
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "spec: ` %{nostdinc*}`\n\nRemeber that, the original spec was `%{!Q:-quiet} %{nostdinc*}`?\n\nthe `-quiet` will be saved into the vector\n\nThat's how it 'substitute' arguments.",
+      "line": 2174
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "ok, so what if your argument is `gcc -Q test.c`?\n\nYou did provide `-Q`, so, they should not substitute `-quiet`.\n\nSo this `a_matched` will be TRUE",
+      "line": 7257
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "will NOT fall here",
+      "line": 7259
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "this time, `matched` is false. WILL NOT FALL HERE.",
+      "line": 7358
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Thus, will not come here, and will not save the string into vector.",
+      "line": 7366
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Exit",
+      "line": 7398
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Then follow hte same flow as previous one, coming back to here eventually.\n\nspec: ` %{nostdinc*} (there's a leading whitespace",
+      "line": 6002
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Whitespace, falls here.",
+      "line": 6053
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "The arg_going is 0. Nothing to do, exit function.",
+      "line": 5608
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "then goes back to this loop.\n\nSpec : `%{nostdinc*}...`\n\nI guess that's how it flows. LoL.\n\nSo you can see that `store_arg()` is not ran.\n\nArgument is not saved into vector.\n\nThat's how it is not substituting the argument.",
+      "line": 6002
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Extra:\n\nHere the spec says, if `-Q` not provided, then substitute `-quiet`.\n\nI have tested, if i put `gcc Q test.c`, the `-quiet` will appear.\n\nI tried to change this to `%{!S:-quiet}`.\n\nThen `make all-gcc -j3` & `make install-gcc -j3`.\n\nThen run with command `gcc -Q test.c`.\n\nI get error `gcc: error: unrecognized command-line option '-Q'`.\n\nIf i run `gcc Q test.c`, no error, and the `-quiet` is printed out.\n\nIf i run `gcc -S test.c`, no error, and NO `-quiet`.\n\nI tried change to `%{!S:-hello}`. I get compile error. \n\nBecause during compilation, they will compile this file and use this file to do further compilation.\n\nAnd because there's no such option such as `-hello`, thus, error, and fail.",
+      "line": 1225
+    },
+    {
+      "file": "../objdir/gcc/specs",
+      "description": "whatever you changed in the `gcc.cc` there, here will reflect.\n\nI tried change here, it doesn't take effect.",
+      "line": 32
+    }
+  ],
+  "ref": "note"
+}

@@ -62,7 +62,7 @@ __extension__ const uchar _cpp_trigraph_map[UCHAR_MAX + 1] = {
 #define s(p, v) x[p] = v;
 
 #endif
-
+// trigraph here
 TRIGRAPH_MAP
   s('=', '#')	s(')', ']')	s('!', '|')
   s('(', '[')	s('\'', '^')	s('>', '}')
@@ -414,7 +414,7 @@ struct builtin_macro
 
 #define B(n, t, f)    { DSC(n), t, f }
 static const struct builtin_macro builtin_array[] =
-{
+{ // built-in array here
   B("__TIMESTAMP__",	 BT_TIMESTAMP,     false),
   B("__TIME__",		 BT_TIME,          false),
   B("__DATE__",		 BT_DATE,          false),
@@ -449,7 +449,7 @@ struct builtin_operator
 
 #define B(n, t)    { DSC(n), t }
 static const struct builtin_operator operator_array[] =
-{
+{ // operator array here
   B("and",	CPP_AND_AND),
   B("and_eq",	CPP_AND_EQ),
   B("bitand",	CPP_AND),
@@ -545,7 +545,7 @@ _cpp_restore_special_builtin (cpp_reader *pfile, struct def_pragma_macro *c)
 	hp->value.builtin = (enum cpp_builtin_type) b->value;
       }
 }
-
+// Read the table above and enter them?
 /* Read the builtins table above and enter them, and language-specific
    macros, into the hash table.  HOSTED is true if this is a hosted
    environment.  */
@@ -700,6 +700,7 @@ cpp_read_main_file (cpp_reader *pfile, const char *fname, bool injecting)
     /* Set the default target (if there is none already).  */
     deps_add_default_target (deps, fname);
 
+  // MEE breakpoints, this is where it set the file to be compiled into pfile
   pfile->main_file
     = _cpp_find_file (pfile, fname,
 		      CPP_OPTION (pfile, preprocessed) ? &pfile->no_search_path
@@ -712,7 +713,7 @@ cpp_read_main_file (cpp_reader *pfile, const char *fname, bool injecting)
   if (_cpp_find_failed (pfile->main_file))
     return NULL;
 
-  _cpp_stack_file (pfile, pfile->main_file,
+  _cpp_stack_file (pfile, pfile->main_file, // MEE breakpoints
 		   injecting || CPP_OPTION (pfile, preprocessed)
 		   ? IT_PRE_MAIN : IT_MAIN, 0);
 

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "gcc-tour",
+  "steps": [
+    {
+      "file": "gcc/gcc-main.cc",
+      "description": "the main function",
+      "line": 47
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "this one setup specs, make sure dont set breakpoint that this function will invoke first.\nMake sure this function finishes up first",
+      "line": 8132
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "this is where you want, set a breakpoint here",
+      "line": 8152
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "call the built-in specs",
+      "line": 8924
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the input_file_compiler was assigned here, in a function called prepare_infiles()",
+      "line": 8849
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the return was from function lookup_compiler()",
+      "line": 8836
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "the compiler was memcpy from default_compilers",
+      "line": 8330
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "here is the default_compilers",
+      "line": 1401
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "at the time of this note is written, it is running @c compiler",
+      "line": 1429
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "ok, next, going into do_spec",
+      "line": 5682
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "ok, next, this probably the main tokenization function.\n\nNow, i wont walk thru how the tokenization goes.\n\nToo many shits, I have separate tour for this.",
+      "line": 5979
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "basically, after all that `do_spec` shit, will come here.\n\nHere is to store the argument into vector.\n\nTo be later used by `execute()` function to get their argument.\n\nAnd execute the driver.",
+      "line": 5629
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "Here, saves the argument to the vector.\n\nfrom what i understand, after all those do_spec shits.\n\nit saves some shits into `argbuf` argument.\n\nThen finally in `execute()` function, will take out the argument of `argbuf`.\n\nThen run the commmands like `cc1 -quiet -v -multiarch` etc. The one you see in `gcc -v test.c`",
+      "line": 2174
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "now, we have arrived to the point where, all the tokenization is done.\n\nSo now, is time to execute the binaries, the `cc1, as, collect2` binaries.\n\nfor some reason, i cant print the value of argbuf[0].\n\nmaybe you can try `argbuf.iterate (i, &arg)`, print the value of `arg`",
+      "line": 3240
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "here the `arg` will be `cc1 -quiet -imultiarch...`\n\nthese command is printed when you do `gcc -v test.c`\n\nHere will use binaries `cc1, as, and collect2`\n\nafter `cc1`, the `.s` file will have assembly code, .s file is generated\n\nafter `as`, the assembly code will be converted into machine code, .o file is generated\n\nthen `collect2` is to link them.",
+      "line": 3266
+    },
+    {
+      "file": "gcc/gcc.cc",
+      "description": "it is after this line, the `.o` file has content inside. It was compiled from assembly code to machine code.\n\nbasically, after this line, it will call the binary to execute their shit.",
+      "line": 3422
+    }
+  ],
+  "ref": "note"
+}

@@ -218,7 +218,7 @@ init_operators (void)
 }
 
 /* Initialize the reserved words.  */
-
+// initialize reserved word
 void
 init_reswords (void)
 {

@@ -3,6 +3,9 @@ Quick Note
 - `master` - original
 - `gcc-13.2.0` - the version im studying on
 - `note` - I put note in this branch, including this me-README.md
+2. The docker will have the repo ready
+- No need remove repo and recommit the docker image
+- This is to save build time.
 
 Pre-requisite
 1. `git clone git@github.com:lolzz77/gcc.git`

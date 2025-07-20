@@ -1,8 +1,18 @@
+Quick Note
+1. 3 branches
+- `master` - original
+- `gcc-13.2.0` - the version im studying on
+- `note` - I put note in this branch, including this me-README.md
+
+Pre-requisite
+1. `git clone git@github.com:lolzz77/gcc.git`
+2. `git clone git@github.com:lolzz77/test.git`
+
 All Code:
 ```bash
 apt-get update -y; apt-get upgrade -y; cd /workspace/gcc; ./contrib/download_prerequisites; apt-get install flex cmake gdb -y; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib;
 ```
-Then until here, dont make first, go into the `/objdir/Makefile`
+Then until here, dont make first, go into the `../objdir/Makefile`
 
 Search for `-O2`, change to `-O0` 
 (This is to disable debug optimization for your debugging experience)

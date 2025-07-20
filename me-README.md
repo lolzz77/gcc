@@ -6,6 +6,8 @@ Quick Note
 2. The docker will have the repo ready
 - No need remove repo and recommit the docker image
 - This is to save build time.
+3. The command to build & install gcc, is from the website https://gcc.gnu.org/install/
+4. Following the instruction, it is recommneded to make a new folder outside of this repo and build it. Hence, in the command below, you will see "mkdir ../objdir" something.
 
 Pre-requisite
 1. `git clone git@github.com:lolzz77/gcc.git`

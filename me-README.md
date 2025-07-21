@@ -64,7 +64,7 @@ After that, please `cd /workspace; git clone https://github.com/lolzz77/test.git
 This file is for your debugging uses.
 
 # Note
-1. gcc installed in `/usr/local/bin/gcc`
+1. gcc installed in `/usr/local/bin/gcc` or `$HOME/gcc-light/bin/gcc` if you specified `--prefix`
 - Try `which gcc` or `whereis gcc`
 - You have to restart your terminal for it to take effect
 - After restarting terminal, verify the version `gcc -v`

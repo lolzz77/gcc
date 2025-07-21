@@ -125,6 +125,18 @@
                 "${input:pickProgram}"
             ]
         },
+        {
+            "type": "cppdbg",
+            "request": "launch",
+            "name": "gcc light weight",
+            "cwd": "/workspace/test/",
+            "stopAtEntry": true,
+            "program": "/root/gcc-light/bin/gcc",
+            "args": [
+                "-v",
+                "-save-temps",
+                "/workspace/test/test.c"]
+        },
         
     ],
     "inputs": [

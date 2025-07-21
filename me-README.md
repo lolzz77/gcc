@@ -15,6 +15,8 @@ Quick Note
 Pre-requisite
 1. `git clone git@github.com:lolzz77/gcc.git`
 2. `git clone git@github.com:lolzz77/test.git`
+3. In VS Code select `Indent using tabs` -> `8`
+- To make the code more readable
 
 All Code:
 ```bash

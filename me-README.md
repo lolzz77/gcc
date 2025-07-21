@@ -60,7 +60,9 @@ To use your built gcc to compile the file, here's the command
 
 # Note
 1. By default, gcc built, is using debug flag -O2, i believe it's fine for you. Learn to be fast pls.
-2. Debug ld
+- And since you let it `O2`, your debugging experience will be impacted.
+- Example, you set breakpoint at line 32, but it shows 37, i mean, it's `O2` debug flag you know what im saying.
+3. Debug ld
 - apparently, `ld` is provided under `gnu binutil`, and the repo name is `gdb bin util`
 - https://www.gnu.org/software/software.html
 - if you scroll to the bottom, you see lots of software names

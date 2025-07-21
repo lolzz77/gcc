@@ -15,7 +15,15 @@ Pre-requisite
 
 All Code:
 ```bash
-apt-get update -y; apt-get upgrade -y; cd /workspace/gcc; ./contrib/download_prerequisites; apt-get install flex cmake gdb -y; cd ../; mkdir objdir; cd objdir; $PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib;
+apt-get update -y; \
+apt-get upgrade -y; \
+cd /workspace/gcc; \
+./contrib/download_prerequisites; \
+apt-get install flex cmake gdb -y; \
+cd ../; \
+mkdir objdir; \
+cd objdir; \
+$PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib;
 ```
 Then until here, dont make first, go into the `../objdir/Makefile`
 

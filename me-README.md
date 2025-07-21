@@ -7,7 +7,10 @@ Quick Note
 - No need remove repo and recommit the docker image
 - This is to save build time.
 3. The command to build & install gcc, is from the website https://gcc.gnu.org/install/
-4. Following the instruction, it is recommneded to make a new folder outside of this repo and build it. Hence, in the command below, you will see "mkdir ../objdir" something.
+4. Following the instruction, it is recommneded to make a new folder outside of this repo and build it.
+- Hence, in the command below, you will see "mkdir ../objdir" something.
+- ALso, it is recommended to use `--prefix`, to separate your built gcc with linux gcc.
+- Else, it will have version incompatiblity issue or something.
 
 Pre-requisite
 1. `git clone git@github.com:lolzz77/gcc.git`
@@ -37,37 +40,24 @@ $PWD/../gcc/configure \
   --disable-libstdcxx-pch \
   --disable-nls
 ```
-Then until here, dont make first, go into the `../objdir/Makefile`
+Then run `make all -j3` (Takes around 50 minutes)
 
-Search for `-O2`, change to `-O0` 
-(This is to disable debug optimization for your debugging experience)
-https://stackoverflow.com/questions/5497855/what-does-value-optimized-out-mean-in-gdb
-
-Then run `make all -j3` (Takes around 1 hour)
+The output built will be in the same folder, which is `~/objdir`
 
 Then `make install -j3`
 
-Note : If you just run `make all-gcc -j3; make install-gcc -j3`
-
-Your installation will success, but when you trigger `gcc`, will fail during linking stage.
-
-I think is because the existing linkers are not compatible with the version you built.
-
-You can just run `make all-gcc -j3; make install-gcc -j3`,
-
-but only after you ran `make all -j3; make install -j3`.
-
-This is to ensure that all other binaries like `ld`, are compatible with your `gcc`.
+Your oinstalled gcc will be what you specified in `--prefix`
+Which is `~/gcc-light/bin`
 
 After that, please `cd /workspace; git clone https://github.com/lolzz77/test.git`
 
 This file is for your debugging uses.
 
+To use your built gcc to compile the file, here's the command
+`~/gcc-light/bin/gcc /workspace/test/test.c`
+
 # Note
-1. gcc installed in `/usr/local/bin/gcc` or `$HOME/gcc-light/bin/gcc` if you specified `--prefix`
-- Try `which gcc` or `whereis gcc`
-- You have to restart your terminal for it to take effect
-- After restarting terminal, verify the version `gcc -v`
+1. By default, gcc built, is using debug flag -O2, i believe it's fine for you. Learn to be fast pls.
 2. Debug ld
 - apparently, `ld` is provided under `gnu binutil`, and the repo name is `gdb bin util`
 - https://www.gnu.org/software/software.html

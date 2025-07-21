@@ -23,7 +23,19 @@ apt-get install flex cmake gdb -y; \
 cd ../; \
 mkdir objdir; \
 cd objdir; \
-$PWD/../gcc/configure --enable-languages=c,c++ --disable-multilib;
+$PWD/../gcc/configure \
+  --prefix=$HOME/gcc-light \
+  --enable-languages=c \
+  --disable-multilib \
+  --disable-bootstrap \
+  --disable-libquadmath \
+  --disable-libsanitizer \
+  --disable-libmpx \
+  --disable-libvtv \
+  --disable-libcilkrts \
+  --disable-libssp \
+  --disable-libstdcxx-pch \
+  --disable-nls
 ```
 Then until here, dont make first, go into the `../objdir/Makefile`
 

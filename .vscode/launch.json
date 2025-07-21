@@ -137,6 +137,27 @@
                 "-save-temps",
                 "/workspace/test/test.c"]
         },
+        {
+            "type": "bashdb",
+            "request": "launch",
+            "name": "bash debug",
+            "cwd": "${workspaceFolder}/../objdir2",
+            "program": "${workspaceFolder}/configure",
+            "args": [
+                "--prefix=$HOME/gcc-light",
+                "--enable-languages=c",
+                "--disable-multilib",
+                "--disable-bootstrap",
+                "--disable-libquadmath",
+                "--disable-libsanitizer",
+                "--disable-libmpx",
+                "--disable-libvtv",
+                "--disable-libcilkrts",
+                "--disable-libssp",
+                "--disable-libstdcxx-pch",
+                "--disable-nls",
+            ]
+        },
         
     ],
     "inputs": [

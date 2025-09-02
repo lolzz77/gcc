@@ -372,6 +372,7 @@ handle_common_deferred_options (void)
     {
       switch (opt->opt_index)
 	{
+  // list of options
 	case OPT_fcall_used_:
 	  fix_register (opt->arg, 0, 1);
 	  break;

@@ -111,7 +111,10 @@ preprocess_file (cpp_reader *pfile)
 
   /* Flush any pending output.  */
   if (print.printed)
+  {
     putc ('\n', print.outf);
+    fflush(print.outf);
+  }
 }
 
 /* Don't emit #pragma or #ident directives if we are processing
@@ -327,6 +330,8 @@ token_streamer::stream (cpp_reader *pfile, const cpp_token *token,
      member.  */
   if (cpp_token_val_index (token) == CPP_TOKEN_FLD_STR)
     account_for_newlines (token->val.str.text, token->val.str.len);
+  
+  fflush(print.outf);
 }
 
 /* Writes out the preprocessed file, handling spacing and paste
@@ -415,7 +420,7 @@ directives_only_cb (cpp_reader *pfile, CPP_DO_task task, void *data_, ...)
       }
       break;
     }
-
+  fflush(print.outf);
   va_end (args);
 }
 
@@ -463,6 +468,7 @@ scan_translation_unit_trad (cpp_reader *pfile)
       if (!CPP_OPTION (pfile, discard_comments))
 	account_for_newlines (pfile->out.base, len);
     }
+  fflush(print.outf);
 }
 
 /* If the token read on logical line LINE needs to be output on a
@@ -499,7 +505,7 @@ maybe_print_line_1 (location_t src_loc, FILE *stream)
     }
   else
     emitted_line_marker = print_line_1 (src_loc, "", stream);
-
+  fflush(stream);
   return emitted_line_marker;
 }
 
@@ -560,7 +566,7 @@ print_line_1 (location_t src_loc, const char *special_flags, FILE *stream)
       putc ('\n', stream);
       emitted_line_marker = true;
     }
-
+  fflush(stream);
   return emitted_line_marker;
 }
 
@@ -611,7 +617,7 @@ do_line_change (cpp_reader *pfile, const cpp_token *token,
       while (-- spaces >= 0)
 	putc (' ', print.outf);
     }
-
+  fflush(print.outf);
   return emitted_line_marker;
 }
 
@@ -631,6 +637,7 @@ cb_ident (cpp_reader *pfile ATTRIBUTE_UNUSED, location_t line,
   maybe_print_line (line);
   fprintf (print.outf, "#ident %s\n", str->text);
   print.src_line++;
+  fflush(print.outf);
 }
 
 static void
@@ -654,6 +661,7 @@ cb_define (cpp_reader *pfile, location_t line, cpp_hashnode *node)
 			    LRK_MACRO_DEFINITION_LOCATION,
 			    &map);
   print.src_line++;
+  fflush(print.outf);
 }
 
 static void
@@ -664,6 +672,7 @@ cb_undef (cpp_reader *pfile, location_t line, cpp_hashnode *node)
   maybe_print_line (line);
   fprintf (print.outf, "#undef %s\n", NODE_NAME (node));
   print.src_line++;
+  fflush(print.outf);
 }
 
 static void
@@ -730,6 +739,7 @@ dump_queued_macros (cpp_reader *pfile ATTRIBUTE_UNUSED)
       free (oq);
     }
   undef_queue = NULL;
+  fflush(print.outf);
 }
 
 static void
@@ -757,6 +767,7 @@ cb_include (cpp_reader *pfile ATTRIBUTE_UNUSED, location_t line,
   putc ('\n', print.outf);
   print.printed = false;
   print.src_line++;
+  fflush(print.outf);
 }
 
 /* Callback called when -fworking-director and -E to emit working
@@ -774,6 +785,7 @@ pp_dir_change (cpp_reader *pfile ATTRIBUTE_UNUSED, const char *dir)
   p = cpp_quote_string (to_file_quoted, (const unsigned char *) dir, to_file_len);
   *p = '\0';
   fprintf (print.outf, "# 1 \"%s//\"\n", to_file_quoted);
+  fflush(print.outf);
 }
 
 /* The file name, line number or system header flags have changed, as
@@ -821,6 +833,7 @@ cb_def_pragma (cpp_reader *pfile, location_t line)
   cpp_output_line (pfile, print.outf);
   print.printed = false;
   print.src_line++;
+  fflush(print.outf);
 }
 
 /* Stream a token as if we had seen it directly ourselves; needed
@@ -846,7 +859,7 @@ dump_macro (cpp_reader *pfile, cpp_hashnode *node, void *v ATTRIBUTE_UNUSED)
       print.printed = false;
       print.src_line++;
     }
-
+  fflush(print.outf);
   return 1;
 }
 
@@ -862,4 +875,5 @@ cb_read_pch (cpp_reader *pfile, const char *name,
 
   fprintf (print.outf, "#pragma GCC pch_preprocess \"%s\"\n", name);
   print.src_line++;
+  fflush(print.outf);
 }

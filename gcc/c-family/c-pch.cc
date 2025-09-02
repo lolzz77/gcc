@@ -88,7 +88,7 @@ static bool pch_ready_to_save_cpp_state = false;
 
 /* Prepare to write a PCH file, if one is being written.  This is
    called at the start of compilation.  */
-
+// start of compilation?
 void
 pch_init (void)
 {

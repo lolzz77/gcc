@@ -52,6 +52,7 @@ along with GCC; see the file COPYING3.  If not see
 
 /* In an IDENTIFIER_NODE, nonzero if this identifier is actually a
    keyword.  C_RID_CODE (node) is then the RID_* value of the keyword.  */
+// checks if is reserved word
 #define C_IS_RESERVED_WORD(ID) TREE_LANG_FLAG_0 (ID)
 
 /* Record whether a type or decl was written with nonconstant size.

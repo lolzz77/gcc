@@ -340,7 +340,7 @@ pex_run_in_environment (struct pex_obj *obj, int flags, const char *executable,
     toclose = obj->next_input;
 
   /* Run the program.  */
-
+  // MEE breakpoint, here runs the program, if u see `cc1 - that's compiling source code into machien code. collect2 - generate a.out file, that u can execute`
   pid = obj->funcs->exec_child (obj, flags, executable, argv, env,
 				in, out, errdes, toclose, &errmsg, err);
   if (pid < 0)

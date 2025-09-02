@@ -41,8 +41,8 @@ struct token_spelling
 static const unsigned char *const digraph_spellings[] =
 { UC"%:", UC"%:%:", UC"<:", UC":>", UC"<%", UC"%>" };
 
-#define OP(e, s) { SPELL_OPERATOR, UC s  },
-#define TK(e, s) { SPELL_ ## s,    UC #e },
+#define OP(e, s) { SPELL_OPERATOR, UC s  }, // translate to: { fixed to SPELL_OPERATOR enum, the "s" character }
+#define TK(e, s) { SPELL_ ## s,    UC #e }, // translate to: { replace whatever given by `s`, with SPELL_s, replace whatever given by `e`, with "e" }
 static const struct token_spelling token_spellings[N_TTYPES] = { TTYPE_TABLE };
 #undef OP
 #undef TK
@@ -2271,7 +2271,7 @@ lex_identifier (cpp_reader *pfile, const uchar *base, bool starts_ucn,
     }
 
   /* Rarely, identifiers require diagnostics when lexed.  */
-  if (__builtin_expect ((result->flags & NODE_DIAGNOSTIC)
+  if (__builtin_expect ((result->flags & NODE_DIAGNOSTIC) // MEE breakpoints - to check the result varaible, the text it is lexing
 			&& !pfile->state.skipping, 0))
     {
       /* It is allowed to poison the same identifier twice.  */
@@ -3614,9 +3614,12 @@ _cpp_lex_token (cpp_reader *pfile)
 	{
 	  pfile->lookaheads--;
 	  result = pfile->cur_token++;
-	}
+	} 
+  // it is lexing an include header file
+  // inspect pfile->quote_include & bracket_include
+  // i hv no idea which header file
       else
-	result = _cpp_lex_direct (pfile);
+	result = _cpp_lex_direct (pfile); // MEE breakpoints
 
       if (result->flags & BOL)
 	{
@@ -3628,7 +3631,7 @@ _cpp_lex_token (cpp_reader *pfile)
 		 handles the directive as normal.  */
 	      && pfile->state.parsing_args != 1)
 	    {
-	      if (_cpp_handle_directive (pfile, result->flags & PREV_WHITE))
+	      if (_cpp_handle_directive (pfile, result->flags & PREV_WHITE)) // MEE breakpoints, this one possibly means the lexing function still lexing the define
 		{
 		  if (pfile->directive_result.type == CPP_PADDING)
 		    continue;
@@ -3664,7 +3667,7 @@ _cpp_lex_token (cpp_reader *pfile)
       /* Outside a directive, invalidate controlling macros.  At file
 	 EOF, _cpp_lex_direct takes care of popping the buffer, so we never
 	 get here and MI optimization works.  */
-      pfile->mi_valid = false;
+      pfile->mi_valid = false; // MEE breakpoint, try put here, to skip all the define lexing
 
       if (!pfile->state.skipping || result->type == CPP_EOF)
 	break;
@@ -3763,7 +3766,8 @@ _cpp_lex_direct (cpp_reader *pfile)
   const unsigned char *comment_start;
   bool fallthrough_comment = false;
   cpp_token *result = pfile->cur_token++;
-
+  // MEE breakpoints, here, read the variable pfile->buffer, will get the content of the code of the file u wan to compile
+  // But depends on caller, u need to make sure it done lexing all other defines first
  fresh_line:
   result->flags = 0;
   buffer = pfile->buffer;
@@ -3830,7 +3834,7 @@ _cpp_lex_direct (cpp_reader *pfile)
   else
     result->src_loc = linemap_position_for_column (pfile->line_table,
 					  CPP_BUF_COLUMN (buffer, buffer->cur));
-
+  // here lexing the token type
   switch (c)
     {
     case ' ': case '\t': case '\f': case '\v': case '\0':
@@ -3900,7 +3904,7 @@ _cpp_lex_direct (cpp_reader *pfile)
 	    }
 	}
       /* Fall through.  */
-
+  // this is where it determines the token type
     case '_':
     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
     case 'g': case 'h': case 'i': case 'j': case 'k': case 'l':
@@ -3915,7 +3919,7 @@ _cpp_lex_direct (cpp_reader *pfile)
       result->type = CPP_NAME;
       {
 	struct normalize_state nst = INITIAL_NORMALIZE_STATE;
-	result->val.node.node = lex_identifier (pfile, buffer->cur - 1, false,
+	result->val.node.node = lex_identifier (pfile, buffer->cur - 1, false, // MEE breakpoints
 						&nst,
 						&result->val.node.spelling);
 	warn_about_normalization (pfile, result, &nst, true);
@@ -4516,6 +4520,7 @@ cpp_output_token (const cpp_token *token, FILE *fp)
       /* An error, most probably.  */
       break;
     }
+  fflush(fp);
 }
 
 /* Compare two tokens.  */

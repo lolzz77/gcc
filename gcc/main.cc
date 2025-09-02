@@ -23,6 +23,9 @@ along with GCC; see the file COPYING3.  If not see
 #include "tm.h"
 #include "diagnostic-core.h"
 #include "toplev.h"
+#include "/workspace/gcc/gcc/ME.h"
+
+int ME_PRINTF = FALSE;
 
 int main (int argc, char **argv);
 
@@ -33,8 +36,21 @@ int main (int argc, char **argv);
 int
 main (int argc, char **argv)
 {
-  toplev toplev (NULL, /* external_timer */
+  toplev toplev (NULL, /* external_timer */ // MEE berakpoints
 		 true /* init_signals */);
+
+   if(
+      argv[argc-1][0] == '-' &&
+      argv[argc-1][1] == 'm' &&
+      argv[argc-1][2] == 'e'
+   )
+   {
+      // gotta remove the argument
+      // else will affect how gcc perform, like, gcc doesn't exepct there's `-me` argument in it
+      ME_PRINTF = TRUE;
+      argv[argc-1] = NULL;
+      argc -= 1;
+   }
 
   int r = toplev.main (argc, argv);
 

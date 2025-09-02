@@ -1,0 +1,44 @@
+{
+	"files": [
+		{
+			"path": "gcc/gcc.cc",
+			"bookmarks": [
+				{
+					"line": 1224,
+					"column": 29,
+					"label": ""
+				},
+				{
+					"line": 2170,
+					"column": 13,
+					"label": ""
+				},
+				{
+					"line": 3262,
+					"column": 32,
+					"label": ""
+				},
+				{
+					"line": 6789,
+					"column": 22,
+					"label": ""
+				},
+				{
+					"line": 8146,
+					"column": 24,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "gcc/vec.h",
+			"bookmarks": [
+				{
+					"line": 932,
+					"column": 18,
+					"label": ""
+				}
+			]
+		}
+	]
+}

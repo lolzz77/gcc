@@ -441,7 +441,7 @@ compile_file (void)
   timevar_push (TV_PARSE_GLOBAL);
 
   /* Parse entire file and generate initial debug information.  */
-  lang_hooks.parse_file ();
+  lang_hooks.parse_file (); // MEE breakpoints
 
   timevar_pop (TV_PARSE_GLOBAL);
   timevar_stop (TV_PHASE_PARSING);
@@ -468,7 +468,7 @@ compile_file (void)
   if (!in_lto_p)
     {
       timevar_start (TV_PHASE_OPT_GEN);
-      symtab->finalize_compilation_unit ();
+      symtab->finalize_compilation_unit (); // this is where it will print 'Analyzing compilation unit' in terminal
       timevar_stop (TV_PHASE_OPT_GEN);
     }
 
@@ -2199,6 +2199,9 @@ toplev::run_self_tests ()
 int
 toplev::main (int argc, char **argv)
 {
+
+  // from here, add 'parise_in' variable into watch, monitor it's data
+
   /* Parsing and gimplification sometimes need quite large stack.
      Increase stack size limits if possible.  */
   stack_limit_increase (64 * 1024 * 1024);
@@ -2268,7 +2271,7 @@ toplev::main (int argc, char **argv)
 	 initialization based on the command line options.  This hook also
 	 sets the original filename if appropriate (e.g. foo.i -> foo.c)
 	 so we can correctly initialize debug output.  */
-      bool no_backend = lang_hooks.post_options (&main_input_filename);
+      bool no_backend = lang_hooks.post_options (&main_input_filename); // MEE breakpoints, here fills up 'parse_in' variable
 
       process_options (no_backend);
 

@@ -1344,7 +1344,7 @@ void
 generate_option_input_file (const char *file,
 			    struct cl_decoded_option *decoded)
 {
-  decoded->opt_index = OPT_SPECIAL_input_file;
+  decoded->opt_index = OPT_SPECIAL_input_file; // MEE breakponits
   decoded->warn_message = NULL;
   decoded->arg = file;
   decoded->orig_option_with_args_text = file;

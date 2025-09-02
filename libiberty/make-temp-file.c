@@ -219,7 +219,7 @@ make_temp_file_with_prefix (const char *prefix, const char *suffix)
   strcpy (temp_filename + base_len + prefix_len, TEMP_FILE);
   strcpy (temp_filename + base_len + prefix_len + TEMP_FILE_LEN, suffix);
 
-  fd = mkstemps (temp_filename, suffix_len);
+  fd = mkstemps (temp_filename, suffix_len); // MEE breakpoint, here creates .s file, but empty inside
   /* Mkstemps failed.  It may be EPERM, ENOSPC etc.  */
   if (fd == -1)
     {

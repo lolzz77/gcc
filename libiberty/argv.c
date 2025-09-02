@@ -406,7 +406,7 @@ expandargv (int *argcp, char ***argvp)
       struct stat sb;
 #endif
       /* We are only interested in options of the form "@file".  */
-      filename = (*argvp)[i];
+      filename = (*argvp)[i]; // MEE breakpoints
       if (filename[0] != '@')
 	continue;
       /* If we have iterated too many times then stop.  */

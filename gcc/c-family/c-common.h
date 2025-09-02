@@ -59,7 +59,7 @@ never after.
    block at the beginning, because they are used as mask bits.  There
    are 28 type modifiers; if we add many more we will have to redesign
    the mask mechanism.  */
-
+// list of reserved keywords
 enum rid
 {
   /* Modifiers: */
@@ -381,6 +381,7 @@ enum c_tree_index
   (&(((struct c_common_identifier *) (id))->node))
 #define C_RID_CODE(id) \
   ((enum rid) (((struct c_common_identifier *) (id))->node.rid_code))
+// set reserved word
 #define C_SET_RID_CODE(id, code) \
   (((struct c_common_identifier *) (id))->node.rid_code = (unsigned char) code)
 

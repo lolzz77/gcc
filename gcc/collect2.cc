@@ -766,7 +766,7 @@ do_link (char **ld_argv, const char *atsuffix)
 
 /* Main program.  */
 
-int
+int // main entry for `collect2` executable
 main (int argc, char **argv)
 {
   enum linker_select

@@ -1259,7 +1259,7 @@ static const char *cpp_debug_options = DUMPS_OPTIONS ("");
 static const char *cc1_options =
 "%{pg:%{fomit-frame-pointer:%e-pg and -fomit-frame-pointer are incompatible}}\
  %{!iplugindir*:%{fplugin*:%:find-plugindir()}}\
- %1 %{!Q:-quiet} %(cpp_debug_options) %{m*} %{aux-info*}\
+ %1 %{!S:-quiet} %(cpp_debug_options) %{m*} %{aux-info*}\
  %{g*} %{O*} %{W*&pedantic*} %{w} %{std*&ansi&trigraphs}\
  %{v:-version} %{pg:-p} %{p} %{f*} %{undef}\
  %{Qn:-fno-ident} %{Qy:} %{-help:--help}\
@@ -1397,7 +1397,7 @@ static struct compiler *compilers;
 static int n_compilers;
 
 /* The default list of file name suffixes and their compilation specs.  */
-
+// list of compilers
 static const struct compiler default_compilers[] =
 {
   /* Add lists of suffixes of known languages here.  If those languages
@@ -1429,6 +1429,7 @@ static const struct compiler default_compilers[] =
   {"@c",
    /* cc1 has an integrated ISO C preprocessor.  We should invoke the
       external preprocessor if -save-temps is given.  */
+      // these are 'switch()' case, go search for function 'validate_switches_from_spec'
      "%{E|M|MM:%(trad_capable_cpp) %(cpp_options) %(cpp_debug_options)}\
       %{!E:%{!M:%{!MM:\
           %{traditional:\
@@ -1678,7 +1679,7 @@ struct spec_list
     *PTR }
 
 /* List of statically defined specs.  */
-static struct spec_list static_specs[] =
+static struct spec_list static_specs[] = // list of specs
 {
   INIT_STATIC_SPEC ("asm",			&asm_spec),
   INIT_STATIC_SPEC ("asm_debug",		&asm_debug),
@@ -1745,7 +1746,7 @@ static struct spec_list *extra_specs = (struct spec_list *) 0;
 static struct spec_list *specs = (struct spec_list *) 0;
 
 /* List of static spec functions.  */
-
+// list of spec functions
 static const struct spec_function static_spec_functions[] =
 {
   { "getenv",                   getenv_spec_function },
@@ -2171,6 +2172,14 @@ store_arg (const char *arg, int delete_always, int delete_failure)
     at_file_argbuf.safe_push (arg);
   else
     argbuf.safe_push (arg);
+
+  if(ME_PRINTF)
+  {
+    const char *me_arg;
+    int me_vec_size = argbuf.length();
+    argbuf.iterate (me_vec_size - 1, &me_arg); // only get the last element in the vector
+    printf("%s:%d:%s MEE saved value is : %s\r\n", __FILE__, __LINE__, __FUNCTION__, me_arg);
+  }
 
   if (delete_always || delete_failure)
     {
@@ -3254,7 +3263,7 @@ execute (void)
     }
 
   /* Count # of piped commands.  */
-  for (n_commands = 1, i = 0; argbuf.iterate (i, &arg); i++)
+  for (n_commands = 1, i = 0; argbuf.iterate (i, &arg); i++) // MEE Breakpoint, here a lot of shits u might wanna explore
     if (strcmp (arg, "|") == 0)
       n_commands++;
 
@@ -3272,12 +3281,12 @@ execute (void)
 
   if (!wrapper_string)
     {
-      string = find_a_program(commands[0].prog);
+      string = find_a_program(commands[0].prog); // MEE breakpoint, here calling the cc1 program
       if (string)
 	commands[0].argv[0] = string;
     }
 
-  for (n_commands = 1, i = 0; argbuf.iterate (i, &arg); i++)
+  for (n_commands = 1, i = 0; argbuf.iterate (i, &arg); i++) // MEE Breakpoint, here a lot of shits u might wanna explore
     if (arg && strcmp (arg, "|") == 0)
       {				/* each command.  */
 #if defined (__MSDOS__) || defined (OS2) || defined (VMS)
@@ -3339,7 +3348,7 @@ execute (void)
 	      if (!**j)
 		fprintf (stderr, " \"\"");
 	      else
-		fprintf (stderr, " %s", *j);
+		fprintf (stderr, " %s", *j); // here prints the output to console hwne you add `-v` to gcc
 
 	  /* Print a pipe symbol after all but the last command.  */
 	  if (i + 1 != n_commands)
@@ -3397,7 +3406,7 @@ execute (void)
 #endif
 
   /* Run each piped subprocess.  */
-
+  // after this line, i see a lot of random name files, i found that those *.s in `/tmp/*.s` is the file that u required to compile
   pex = pex_init (PEX_USE_PIPES | ((report_times || report_times_to_file)
 				   ? PEX_RECORD_TIMES : 0),
 		  progname, temp_filename);
@@ -3410,7 +3419,7 @@ execute (void)
       int err;
       const char *string = commands[i].argv[0];
 
-      errmsg = pex_run (pex,
+      errmsg = pex_run (pex, // MEE breakpoints, after this line, the .s file has content
 			((i + 1 == n_commands ? PEX_LAST : 0)
 			 | (string == commands[i].prog ? PEX_SEARCH : 0)),
 			string, CONST_CAST (char **, commands[i].argv),
@@ -3623,7 +3632,7 @@ struct infile
 };
 
 /* Also a vector of input files specified.  */
-
+// infiles contains your c source file to be compiled.
 static struct infile *infiles;
 
 int n_infiles;
@@ -5601,7 +5610,7 @@ end_going_arg (void)
       const char *string;
 
       obstack_1grow (&obstack, 0);
-      string = XOBFINISH (&obstack, const char *);
+      string = XOBFINISH (&obstack, const char *); // here takes the obstack value to 'string' var
       if (this_is_library_file)
 	string = find_file (string);
       if (this_is_linker_script)
@@ -5674,7 +5683,7 @@ do_spec (const char *spec)
 {
   int value;
 
-  value = do_spec_2 (spec, NULL);
+  value = do_spec_2 (spec, NULL); // MEE breakpoints, after this line, a *.s file is created in `/tmp/` dir, that is ur machien code (compiled) for the file u required to compile
 
   /* Force out any unfinished command.
      If -pipe, this forces out the last command if it ended in `|'.  */
@@ -5966,9 +5975,21 @@ putenv_COLLECT_AS_OPTIONS (vec<char_p> vec)
    Value is zero unless a line was finished
    and the command on that line reported an error.  */
 
-static int
+static int // when you put breakpoint here, the 1st that comes here is setup_spec(), make sure you ignore that, the one that you really cared about is coming from do_spec_on_infiles()
 do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 {
+  if(ME_PRINTF)
+  {
+    const char *me_p = spec;
+    printf("%s:%d:%s MEE spec is : ", __FILE__, __LINE__, __FUNCTION__);
+    while(*me_p != '\0')
+    {
+      printf("%c", *me_p);
+      me_p++;
+    }
+    printf("\r\n");
+  }
+
   const char *p = spec;
   int c;
   int i;
@@ -6005,7 +6026,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 
 	if (argbuf.length () > 0)
 	  {
-	    value = execute ();
+	    value = execute (); // MEE breakpoint, after creating .s temporary file, after this line, will have content inside that file
 	    if (value)
 	      return value;
 	  }
@@ -6318,7 +6339,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 
 		/* Make a new association if needed.  %u and %j
 		   require one.  */
-		if (t == 0 || c == 'u' || c == 'j')
+		if (t == 0 || c == 'u' || c == 'j') // MEE breakpoint, here create the .s machine code file
 		  {
 		    if (t == 0)
 		      {
@@ -6335,7 +6356,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 		    else
 		      t->suffix = save_string (suffix, suffix_length);
 		    t->unique = (c == 'u' || c == 'U' || c == 'j');
-		    temp_filename = make_temp_file (t->suffix);
+		    temp_filename = make_temp_file (t->suffix); // MEE breakpoint, here create .s file, but empty inside
 		    temp_filename_length = strlen (temp_filename);
 		    t->filename = temp_filename;
 		    t->filename_length = temp_filename_length;
@@ -6656,7 +6677,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 	    /* Here we define characters other than letters and digits.  */
 
 	  case '{':
-	    p = handle_braces (p);
+	    p = handle_braces (p); // MEE breakpoint, when the spec is "%{!fwpa*:   %{fcompare-debug=*"... . And, stop going forward when it is "!S:-o %|.s |\n as %(asm_options) %m.s %A }", step in instead.
 	    if (p == 0)
 	      return -1;
 	    break;
@@ -6757,7 +6778,7 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 	      while (*p && *p != ')')
 		p++;
 
-	      /* See if it's in the list.  */
+	      /* See if it's in the list.  */ // MEE breakpoints, here got a list of specs that *compiled*?...
 	      for (len = p - name, sl = specs; sl; sl = sl->next)
 		if (sl->name_len == len && !strncmp (sl->name, name, len))
 		  {
@@ -6770,8 +6791,8 @@ do_spec_1 (const char *spec, int inswitch, const char *soft_matched_part)
 		  }
 
 	      if (sl)
-		{
-		  value = do_spec_1 (name, 0, NULL);
+		{ // MEE breakpoints, stop when see "%{!fwpa*:   %{fcompare-debug=*|fdump-final-insns=*:%:compare-debug-dump-opt()}   %{!S:-o %|.s |\n as %(asm_options) %m.s %A }  }"
+		  value = do_spec_1 (name, 0, NULL); // MEE breakpoints, reminder, this is recursive calling!!
 		  if (value != 0)
 		    return value;
 		}
@@ -7083,7 +7104,7 @@ process_marked_switches (void)
 
 static const char *
 handle_braces (const char *p)
-{
+{ // MEE breakpoints, step here when the *p is "!S:-o %|.s |\n as %(asm_options) %m.s %A }"
   const char *atom, *end_atom;
   const char *d_atom = NULL, *d_end_atom = NULL;
   char *esc_buf = NULL, *d_esc_buf = NULL;
@@ -7342,7 +7363,7 @@ process_brace_body (const char *p, const char *atom, const char *end_atom,
       char *string = save_string (body, end_body - body);
       if (!have_subst)
 	{
-	  if (do_spec_1 (string, 0, NULL) < 0)
+	  if (do_spec_1 (string, 0, NULL) < 0) // MEE breakpoint, stop when string is "-o %|.s |\n as %(asm_options) %m.s %A"
 	    {
 	      free (string);
 	      return 0;
@@ -8873,13 +8894,13 @@ driver::do_spec_on_infiles () const
 
       /* Figure out which compiler from the file's suffix.  */
 
-      input_file_compiler
+      input_file_compiler //here, get the compiler & their specs
 	= lookup_compiler (infiles[i].name, input_filename_length,
 			   infiles[i].language);
 
       if (input_file_compiler)
 	{
-	  /* Ok, we found an applicable compiler.  Run its spec.  */
+	  /* Ok, we found an applicable compiler.  Run its spec.  */ // MEE breakpoitns, inspect the compiler spec
 
 	  if (input_file_compiler->spec[0] == '#')
 	    {
@@ -8900,8 +8921,8 @@ driver::do_spec_on_infiles () const
 		  debug_check_temp_file[1] = NULL;
 		}
 
-	      value = do_spec (input_file_compiler->spec);
-	      infiles[i].compiled = true;
+	      value = do_spec (input_file_compiler->spec); // TODO: study this
+	      infiles[i].compiled = true; // MEE, this means the file is compiled!
 	      if (value < 0)
 		this_file_error = 1;
 	      else if (compare_debug && debug_check_temp_file[0])
@@ -8964,14 +8985,14 @@ driver::do_spec_on_infiles () const
 	  delete_failure_queue ();
 	  errorcount++;
 	}
-      /* If this compilation succeeded, don't delete those files later.  */
+      /* If this compilation succeeded, don't delete those files later.  */ // MEE breakpoints: here ady done compilation? HAHA
       clear_failure_queue ();
     }
 
   /* Reset the input file name to the first compile/object file name, for use
      with %b in LINK_SPEC. We use the first input file that we can find
      a compiler to compile it instead of using infiles.language since for
-     languages other than C we use aliases that we then lookup later.  */
+     languages other than C we use aliases that we then lookup later.  */ // MEE breakpoints: here preparing to do linking?
   if (n_infiles > 0)
     {
       int i;
@@ -9106,7 +9127,7 @@ driver::maybe_run_linker (const char *argv0) const
 		    " to the linker.\n\n"));
 	  fflush (stdout);
 	}
-      int value = do_spec (link_command_spec);
+      int value = do_spec (link_command_spec); // MEE breakpoints, the linker spec
       if (value < 0)
 	errorcount = 1;
       linker_was_run = (tmp != execution_count);

@@ -59,7 +59,7 @@ static void
 define__GNUC__ (cpp_reader *pfile)
 {
   int major, minor, patchlevel;
-
+  // here define a lot of shits
   parse_basever (&major, &minor, &patchlevel);
   cpp_define_formatted (pfile, "__GNUC__=%d", major);
   cpp_define_formatted (pfile, "__GNUC_MINOR__=%d", minor);
@@ -147,7 +147,7 @@ define_builtin_macros_for_type_sizes (cpp_reader *pfile)
 #define define_type_sizeof(NAME, TYPE)                             \
     cpp_define_formatted (pfile, NAME"=" HOST_WIDE_INT_PRINT_DEC,   \
                           tree_to_uhwi (TYPE_SIZE_UNIT (TYPE)))
-
+  // here defines a lot of shits
   define_type_sizeof ("__SIZEOF_INT__", integer_type_node);
   define_type_sizeof ("__SIZEOF_LONG__", long_integer_type_node);
   define_type_sizeof ("__SIZEOF_LONG_LONG__", long_long_integer_type_node);
